@@ -1,14 +1,19 @@
-export const LENDER_CONTRACT_ADDRESS =
-  '0xe7e5ff8f7745c13bef49d6fddbc6c208e99d5244';
+export const LENDER_CONTRACT_ADDRESS = 'lender.defizap.eth';
 
-export const ETHMAXIMALIST_CONTRACT_ADDRESS =
-  '0xc36fe594dB560bFDE1BDf5d6b40a7a775d702a1C';
+export const ETHMAXIMALIST_CONTRACT_ADDRESS = 'ethmax.defizap.eth';
 
-export const MODERATE_BULL_CONTRACT_ADDRESS =
-  '0x9DC5Ee55De10f9345e9f58EA1539320B9644B2f4';
+export const MODERATE_BULL_CONTRACT_ADDRESS = 'moderatebull.defizap.eth';
 
-export const DOUBLE_BULL_CONTRACT_ADDRESS =
-  '0x2e213129b76d4b12abf590bf18874362ce0976dc';
+export const DOUBLE_BULL_CONTRACT_ADDRESS = 'doublebull.defizap.eth';
 
-export const SUPER_SAVER_CONTRACT_ADDRESS =
-  '0xd31c3dec5ae4051dc1b70f2cdec965e80880f386';
+export const SUPER_SAVER_CONTRACT_ADDRESS = 'supersaver.defizap.eth';
+
+export const UNIPOOL_DAI_CONTRACT_ADDRESS = 'DAIUnipool.DeFiZap.eth';
+
+export const UNIPOOL_MKR_CONTRACT_ADDRESS = 'MKRUnipool.DeFiZap.eth';
+
+export const UNIPOOL_SNX_CONTRACT_ADDRESS = 'SNXUnipool.DeFiZap.eth';
+
+export const UNIPOOL_SETH_CONTRACT_ADDRESS = 'sETHUnipool.DeFiZap.eth';
+
+export const UNIPOOL_SAI_CONTRACT_ADDRESS = 'SAIUnipool.DeFiZap.eth';
