@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Table, TableRow } from '@mydefi/ui';
 import DefiZap from 'defizapjs/src/DefiZap';
 import Web3 from 'web3';
-import web3 from '../../web3/web3';
 
 import CompoundCard from './CompoundCard';
 import FulcrumCard from './FulcrumCard';
@@ -31,7 +30,7 @@ class AnalyticsContainer extends PureComponent {
   constructor(props) {
     super(props);
     const defiZap = new DefiZap();
-
+    const web3 = new Web3(window.ethereum);
     this.state = {
       selectedAddress: '',
       web3,

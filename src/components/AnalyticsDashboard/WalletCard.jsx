@@ -3,7 +3,6 @@ import { Card, Text } from '@mydefi/ui';
 import PropTypes from 'prop-types';
 import numeral from 'numeral';
 import Colors from './Colors';
-import web3 from '../../web3/web3';
 
 class WalletCard extends React.Component {
   constructor(props) {
@@ -21,7 +20,7 @@ class WalletCard extends React.Component {
     if (this.selectedAddressExists()) {
       const balance = await this.getSelectedBalance();
       this.setState({
-        currentBalance: web3.utils.fromWei(balance, 'ether')
+        currentBalance: this.props.web3.utils.fromWei(balance, 'ether')
       });
     }
     setTimeout(this.updateWallet, 1000);
@@ -35,7 +34,7 @@ class WalletCard extends React.Component {
   };
 
   getSelectedBalance = async () => {
-    return this.props.web3.eth.getBalance(web3.givenProvider.selectedAddress);
+    return this.props.web3.eth.getBalance(this.props.web3.givenProvider.selectedAddress);
   };
 
   render() {

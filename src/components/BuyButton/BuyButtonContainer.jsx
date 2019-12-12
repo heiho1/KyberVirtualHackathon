@@ -138,9 +138,10 @@ class LenderBuyButton extends React.Component {
 
   renderModal() {
     const { open, value } = this.state;
-    const { name } = this.props;
+    const { id, name } = this.props;
     return (
       <Modal isOpen={open} toggle={this.toggle} centered>
+        <h1>BuyButtonContainer {id}</h1>
         <ModalBody>
           <form onSubmit={this.handleSubmit}>
             <div className="buycontainer">

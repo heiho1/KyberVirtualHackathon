@@ -48,21 +48,17 @@ const Zap = props => {
   console.log(props);
   return (
     <div key={props.name} className="m-4 p-4 bg-white flex-column">
-      {/* <Row className={styles.zapName}>
-        <h3>{props.name}</h3>
-      </Row> */}
       <Row>
         <Col xs={12} md={4} className="align-text-center">
           <Donut data={props} />
           <div className="mt-2">
             <BuyButtonContainer
               name={props.name}
+              id={props.id}
               isOrderable={props.isOrderable}
               block
             />
           </div>
-          {/* </Col>
-        <Col> */}
           {props.isOrderable ? (
             <div className="mt-2">
               <Button
@@ -155,33 +151,6 @@ const Zap = props => {
           ) : null}
         </Col>
       </Row>
-      {/* <hr />
-      <Row> */}
-      {/* <Col xs={12} md={6}>
-          <div className="mt-2">
-            <BuyButtonContainer
-              name={props.name}
-              isOrderable={props.isOrderable}
-              block
-            />
-          </div>
-        </Col>
-        <Col xs={12} md={6}>
-          {props.isOrderable ? (
-            <div className="mt-2">
-              <Button
-                href={`/zaps/${props.id}`}
-                size="auto"
-                variant="outline-dark"
-                value="Learn More"
-                block
-              >
-                Learn More
-              </Button>
-            </div>
-          ) : null}
-        </Col> */}
-      {/* </Row> */}
     </div>
   );
 };
@@ -191,6 +160,7 @@ const ZapListView = props => {
   return (
     <Container>
       <NavigationBar />
+      <h1>ZapListViewV2</h1>
       {data.filter(zap => zap.isOrderable).map(zap => Zap(zap))}
       <hr />
       {footerButtons()}

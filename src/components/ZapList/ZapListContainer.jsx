@@ -12,11 +12,18 @@ class ZapListContainer extends PureComponent {
     autobind(this);
   }
 
+  types = () => Object.keys(Zaps);
+
   data = () => Object.values(Zaps);
 
   render() {
-    return <ZapListViewV2 data={this.data()} />;
-    // return <ZapListView />;
+    console.log(JSON.stringify(this.types()));
+    return (
+      <div>
+        <h1>ZapListContainer</h1>
+        <ZapListViewV2 data={this.data()} />
+      </div>
+    );
   }
 }
 
