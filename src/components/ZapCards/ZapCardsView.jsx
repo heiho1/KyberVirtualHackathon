@@ -27,7 +27,7 @@ const ZapCardsView = props => {
           </div>
           <div className="text-center justify-content-center">
             <Button href={`/zaps/${id}`} size="lg" variant="primary">
-              More Info
+              Learn More
             </Button>
           </div>
         </Card.Body>

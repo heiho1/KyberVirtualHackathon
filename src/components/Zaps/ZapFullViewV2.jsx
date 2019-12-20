@@ -29,7 +29,9 @@ class ZapFullView extends PureComponent {
       hasReturnsChart,
       oneClickAccessTo,
       platformsUsed,
-      metamaskInteractionsSaved
+      metamaskInteractionsSaved,
+      ensAddress,
+      gasLimitRequirement
     } = this.props;
 
     return (
@@ -44,7 +46,14 @@ class ZapFullView extends PureComponent {
             <div className="h1 bold">{name}</div>
           </Card.Title> */}
           <br />
-          <BuyButtonContainer name={name} size="lg" isOrderable={isOrderable} />
+          <BuyButtonContainer 
+            name={name} 
+            ensAddress={ensAddress} 
+            gasLimitRequirement={gasLimitRequirement} 
+            hasReturnsChart = {hasReturnsChart}
+            size="lg" 
+            isOrderable={isOrderable} 
+          />
           <Row className="justify-content-center align-text-center">
             <Col xs={12} md={6} className="justify-content-center text-center">
               {oneClickAccessTo ? (
@@ -54,6 +63,7 @@ class ZapFullView extends PureComponent {
                     {oneClickAccessTo.map((access, index) => (
                       <Badge
                         key={access.text}
+                        style={{backgroundColor:access.color}}
                         variant="primary"
                         className={index === 0 ? 'beforePill' : 'afterPill'}
                       >
@@ -87,6 +97,7 @@ class ZapFullView extends PureComponent {
                         target="_blank"
                       >
                         <Badge
+                        style={{backgroundColor:platform.color}}
                           variant="success"
                           className={index === 0 ? 'beforePill' : 'afterPill'}
                         >
@@ -99,14 +110,35 @@ class ZapFullView extends PureComponent {
               ) : null}
               {metamaskInteractionsSaved ? (
                 <span>
-                  <h5 className="zapFullViewHeader">
-                    Metamask interactions abstracted
+                  <h5>
+                  Wallet interactions saved:
                   </h5>
                   <h1>
                     {metamaskInteractionsSaved.map(
                       interactions => interactions.saved
                     )}
                   </h1>
+                </span>
+              ) : null}
+              {ensAddress ? (
+                <span>
+                  <h5>
+                    View contract on Etherscan
+                </h5>
+                  <h5>
+                    <a
+                      href={`https://etherscan.io/address/${ensAddress}`}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <Badge
+                        variant="info"
+                      >
+                        {ensAddress}
+                      </Badge>
+                    </a>
+                  </h5>
+              <p style={{fontSize:'0.75em'}}>Alternatively send ETH directly to this address using<i> minimum </i>{gasLimitRequirement} gas.</p>
                 </span>
               ) : null}
               <div className="mt-2">

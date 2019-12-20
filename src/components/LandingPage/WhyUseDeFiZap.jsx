@@ -15,11 +15,10 @@ const WhyUseDeFiZap = () => (
     <Row className="justify-content-center text-center">
       <Col sm md lg>
         <img src={SaveTime} width="94px" alt="Save Time" />
-        <h5>Save Time {'&'} Gas</h5>
+        <h5>Save Time</h5>
         <p>
           DeFiZap is a system of smart contracts - Zaps - that deploys capital
-          across multiple DeFi protocols in one transaction, saving users’ time
-          and gas fees.
+          across multiple DeFi protocols in one transaction, saving users’ time.
         </p>
       </Col>
       <Col sm md lg>
