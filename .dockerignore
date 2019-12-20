@@ -1,2 +1,6 @@
 .git/
+<<<<<<< HEAD
+node_modules/
+=======
+>>>>>>> 91014b62bfbc5ef46f5dcec82c2016c92c6074bb
 v6/
