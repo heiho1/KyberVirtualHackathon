@@ -6,7 +6,6 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import Row from 'react-bootstrap/Row';
 import Web3 from 'web3';
 import isEmpty from 'lodash/isEmpty';
-
 import '../../App.css';
 import Loading from '../Loading';
 import contractProvider from '../../utils/web3DataProvider';
@@ -18,9 +17,22 @@ import {
   checkResponse
 } from '../../api/apiHelpers';
 
+// import Spreads from '../Spreads';
+import Spread from '../Spreads/Spread';
+
 class LenderBuyButton extends React.Component {
   constructor(props) {
     super(props);
+
+    let web3 = {};
+    if (
+      typeof window.ethereum !== 'undefined' ||
+      typeof window.web3 !== 'undefined'
+    ) {
+      const provider = window.ethereum || window.web3.currentProvider;
+      web3 = new Web3(provider);
+    }
+
     this.state = {
       open: false,
       value: '',
@@ -28,7 +40,8 @@ class LenderBuyButton extends React.Component {
       showLoader: false,
       gasMode: 'average',
       errorMessage: '',
-      depositTxHash: ''
+      depositTxHash: '',
+      web3
     };
   }
 
@@ -58,16 +71,8 @@ class LenderBuyButton extends React.Component {
     });
     try {
       await this.initialize();
-      let web3;
-      if (
-        typeof window.ethereum !== 'undefined' ||
-        typeof window.web3 !== 'undefined'
-      ) {
-        const provider = window.ethereum || window.web3.currentProvider;
-        web3 = new Web3(provider);
-      }
-      const networkId = await web3.eth.net.getId();
-      const { ens } = web3.eth;
+      const networkId = await this.state.web3.eth.net.getId();
+      const { ens } = this.state.web3.eth;
       await this.getGas();
       if (networkId !== 1) {
         alert(
@@ -82,7 +87,10 @@ class LenderBuyButton extends React.Component {
         } = contractProvider(this.props.name);
         const newAddress = await ens.getAddress(contractAddress);
         const valueToInvest = this.state.value;
-        const contract = new web3.eth.Contract(contractAbi, newAddress);
+        const contract = new this.state.web3.eth.Contract(
+          contractAbi,
+          newAddress
+        );
         this.setState({ showLoader: true });
         let tx;
         if (this.props.name === 'Lender') {
@@ -94,7 +102,7 @@ class LenderBuyButton extends React.Component {
         }
         tx.send({
           from: this.state.account,
-          value: web3.utils.toWei(valueToInvest, 'ether'),
+          value: this.state.web3.utils.toWei(valueToInvest, 'ether'),
           gas,
           gasPrice: isEmpty(gasPrice) ? String(this.state.gasValue) : gasPrice
         })
@@ -137,11 +145,10 @@ class LenderBuyButton extends React.Component {
   }
 
   renderModal() {
-    const { open, value } = this.state;
+    const { open, value, web3 } = this.state;
     const { id, name } = this.props;
     return (
       <Modal isOpen={open} toggle={this.toggle} centered>
-        <h1>BuyButtonContainer {id}</h1>
         <ModalBody>
           <form onSubmit={this.handleSubmit}>
             <div className="buycontainer">
@@ -167,6 +174,9 @@ class LenderBuyButton extends React.Component {
                   }
                 />
                 <p className="buytext pt-4 ml-2">ETH</p>
+              </div>
+              <div>
+                <Spread type={id} input={this.state.value} />
               </div>
               <Row className="justify-content-center py-3">
                 Select Transaction Speed:{' '}

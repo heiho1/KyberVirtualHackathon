@@ -17,10 +17,8 @@ class ZapListContainer extends PureComponent {
   data = () => Object.values(Zaps);
 
   render() {
-    console.log(JSON.stringify(this.types()));
     return (
       <div>
-        <h1>ZapListContainer</h1>
         <ZapListViewV2 data={this.data()} />
       </div>
     );

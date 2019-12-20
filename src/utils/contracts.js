@@ -63,4 +63,3 @@ export function getContract(address, ABI, library, account) {
     getProviderOrSigner(library, account)
   );
 }
-

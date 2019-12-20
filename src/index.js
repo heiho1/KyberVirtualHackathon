@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'; // Important because our Bootstrap CS
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
 import { Provider } from 'react-redux';
-
+import { ethers } from 'ethers';
 import App from './App';
 import configureStore from './store';
 import './index.css';

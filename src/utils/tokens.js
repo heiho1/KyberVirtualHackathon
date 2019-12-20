@@ -87,6 +87,9 @@ export async function getTokenDecimals(tokenAddress, library) {
 }
 // get the token balance of an address
 export async function getTokenBalance(tokenAddress, address, library) {
+  console.log(
+    `getTokenBalance tokenAddress - ${tokenAddress} address - ${address} library - ${library}`
+  );
   if (!isAddress(tokenAddress) || !isAddress(address)) {
     throw Error(
       `Invalid 'tokenAddress' or 'address' parameter '${tokenAddress}' or '${address}'.`
@@ -122,6 +125,7 @@ export async function getTokenAllowance(
 
 // get the ether balance of an address
 export async function getEtherBalance(address, library) {
+  console.log(`getEtherBalance address - ${address} library - ${Object.keys(library)}`);
   if (!isAddress(address)) {
     throw Error(`Invalid 'address' parameter '${address}'`);
   }

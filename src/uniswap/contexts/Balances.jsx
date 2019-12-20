@@ -269,6 +269,9 @@ export function useAllBalances() {
 }
 
 export function useAddressBalance(address, tokenAddress) {
+  console.log(
+    `useAddressBalance address - ${address} tokenAddress - ${tokenAddress}`
+  );
   const { library, chainId } = useWeb3React();
 
   const globalBlockNumber = useBlockNumber();
@@ -276,6 +279,13 @@ export function useAddressBalance(address, tokenAddress) {
   const [state, { update }] = useBalancesContext();
   const { value, blockNumber } =
     safeAccess(state, [chainId, address, tokenAddress]) || {};
+
+  console.log(
+    `useAddressBalance blockNumber - ${blockNumber} globalBlockNumber - ${globalBlockNumber}`
+  );
+  console.log(
+    `useAddressBalance state - ${JSON.stringify(state)} library - ${library}`
+  );
 
   useEffect(() => {
     if (
@@ -285,17 +295,26 @@ export function useAddressBalance(address, tokenAddress) {
       (chainId || chainId === 0) &&
       library
     ) {
+      console.log(
+        `useAddressBalance tokenAddress still ${tokenAddress} for value ${value}`
+      );
       let stale = false;
       (tokenAddress === 'ETH'
         ? getEtherBalance(address, library)
         : getTokenBalance(tokenAddress, address, library)
       )
         .then(value => {
+          console.log(
+            `got balance for address ${tokenAddress} with value ${value}`
+          );
           if (!stale) {
             update(chainId, address, tokenAddress, value, globalBlockNumber);
           }
         })
-        .catch(() => {
+        .catch(err => {
+          console.error(
+            `Got error getting balance for ${tokenAddress} of ${err}`
+          );
           if (!stale) {
             update(chainId, address, tokenAddress, null, globalBlockNumber);
           }
@@ -319,11 +338,14 @@ export function useAddressBalance(address, tokenAddress) {
 }
 
 export function useExchangeReserves(tokenAddress) {
+  console.log(`useExchangeReserves ${tokenAddress}`);
   const { exchangeAddress } = useTokenDetails(tokenAddress);
 
   const reserveETH = useAddressBalance(exchangeAddress, 'ETH');
   const reserveToken = useAddressBalance(exchangeAddress, tokenAddress);
-
+  console.log(
+    `useExchangeReserves returning reserveETH - ${reserveETH} reserveToken - ${reserveToken}`
+  );
   return { reserveETH, reserveToken };
 }
 

@@ -26,7 +26,7 @@ const EXCHANGE_ADDRESS = 'exchangeAddress';
 
 const UPDATE = 'UPDATE';
 
-const ETH = {
+export const ETH = {
   ETH: {
     [NAME]: 'Ethereum',
     [SYMBOL]: 'ETH',
@@ -35,7 +35,7 @@ const ETH = {
   }
 };
 
-const INITIAL_TOKENS_CONTEXT = {
+export const INITIAL_TOKENS_CONTEXT = {
   1: {
     '0x737F98AC8cA59f2C68aD658E3C3d8C8963E40a4c': {
       [NAME]: 'Amon',
@@ -543,7 +543,10 @@ const INITIAL_TOKENS_CONTEXT = {
 const TokensContext = createContext();
 
 function useTokensContext() {
-  return useContext(TokensContext);
+  // console.log(`TokensContext ${JSON.stringify(Object.keys(TokensContext))}`);
+  const retCtx = useContext(TokensContext);
+  // console.log(`useTokenContext ${retCtx}`);
+  return retCtx;
 }
 
 function reducer(state, { type, payload }) {
@@ -609,12 +612,16 @@ export default function Provider({ children }) {
 
 export function useTokenDetails(tokenAddress) {
   const { library, chainId } = useWeb3React();
+  console.log(`useTokenDetails ${tokenAddress} library - ${library} chainId - ${chainId}`);
 
   const [state, { update }] = useTokensContext();
   const allTokensInNetwork = {
     ...ETH,
     ...(safeAccess(state, [chainId]) || {})
   };
+  // console.log(
+  //   `allTokensInNetwork ${JSON.stringify(Object.keys(allTokensInNetwork))}`
+  // );
   const {
     [NAME]: name,
     [SYMBOL]: symbol,

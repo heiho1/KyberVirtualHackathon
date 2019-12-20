@@ -13,7 +13,6 @@ import { injected } from '../connectors';
 export function useWeb3React() {
   const context = useWeb3ReactCore();
   const contextNetwork = useWeb3ReactCore(NetworkContextName);
-
   return context.active ? context : contextNetwork;
 }
 

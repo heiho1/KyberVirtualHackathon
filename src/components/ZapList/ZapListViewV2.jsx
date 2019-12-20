@@ -160,7 +160,6 @@ const ZapListView = props => {
   return (
     <Container>
       <NavigationBar />
-      <h1>ZapListViewV2</h1>
       {data.filter(zap => zap.isOrderable).map(zap => Zap(zap))}
       <hr />
       {footerButtons()}
