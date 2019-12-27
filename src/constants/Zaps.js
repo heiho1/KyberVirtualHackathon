@@ -557,7 +557,7 @@ const Zaps = {
     },
     oneClickAccessTo: [
       { text: '🚀 Long ETH with 2X Leverage', color: '#007BFF',url:'https://etherscan.io/token/0x8129d9b2c3748791c430fea241207a4f9a0ac516' },
-      { text: '🐻 Short BTC', color: '#DC3545' }
+      { text: '🐻 Short BTC', color: '#DC3545', url:'https://etherscan.io/token/0x9fc208947d92b1588f7bde245620439568a8587a' }
     ],
     platformsUsed: [
       {
