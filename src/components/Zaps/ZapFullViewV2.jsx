@@ -75,14 +75,22 @@ class ZapFullView extends PureComponent {
                   <h5>
                     {oneClickAccessTo.map((access, index) => (
                       <Row key={access.text} className="justify-content-center">
-                        <Badge
+                        <a
+                          href={access.url ? access.url : hasReturnsChart && access.text !== '💸 Lending' ? `https://pools.fyi/#/returns/${tokenAddress}` : null}
+
                           key={access.text}
-                          style={{ backgroundColor: access.color }}
-                          variant="primary"
-                          className={index === 0 ? 'beforePill' : 'afterPill'}
+                          rel="noopener noreferrer"
+                          target="_blank"
                         >
-                          {access.text}
-                        </Badge>
+                          <Badge
+                            key={access.text}
+                            style={{ backgroundColor: access.color }}
+                            variant="primary"
+                            className={index === 0 ? 'beforePill' : 'afterPill'}
+                          >
+                            {access.text}
+                          </Badge>
+                        </a>
                       </Row>
                     ))}
                   </h5>
