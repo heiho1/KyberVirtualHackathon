@@ -228,7 +228,7 @@ class DoughtnutChart extends React.Component {
       }
       return this.assignRandomColor();
     });
-    console.log('colors ', colors);
+    // console.log('colors ', colors);
     return colors;
   }
 

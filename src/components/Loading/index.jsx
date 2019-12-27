@@ -1,11 +1,28 @@
+// import React from 'react';
+// import Spinner from 'react-bootstrap/Spinner';
+
+// const Loading = () => (
+//   <div className="container loading">
+//     <div className="row">
+//       <div className="col-md-12 text-center pt-4">
+//         <Spinner animation="grow" variant="primary" />
+//       </div>
+//     </div>
+//   </div>
+// );
+
+// export default Loading;
+
+
 import React from 'react';
-import Spinner from 'react-bootstrap/Spinner';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 const Loading = () => (
   <div className="container loading">
     <div className="row">
-      <div className="col-md-12 text-center">
-        <Spinner animation="grow" variant="primary" />
+      <div className="col-md-12 text-center pt-4">
+        <FontAwesomeIcon size='2x' color='blue' icon={faSpinner} spin/>
       </div>
     </div>
   </div>
