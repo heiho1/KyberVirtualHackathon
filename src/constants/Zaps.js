@@ -97,7 +97,7 @@ const Zaps = {
     ],
     oneClickAccessTo: [
       { text: '🦄 Pooling', color: '#66098e' },
-      { text: '⛽ Staking Rewards', color: '#6C757D' }
+      { text: '⛽ Staking Rewards', color: '#6C757D', url:'https://github.com/Synthetixio/SIPs/blob/master/SIPS/sip-8.md' }
     ],
     numberOfInteractions: 5,
     outperformsDuring: ['Choppy Markets'],
@@ -337,7 +337,7 @@ const Zaps = {
         color: '#000000'
       }
     ],
-    oneClickAccessTo: [{ text: '🦄 Pooling', color: '#66098e' }],
+    oneClickAccessTo: [{ text: '🦄 Pooling', color: '#66098e' }, {text: '📈DSR', color:'#1AAB9B', url:'https://community-development.makerdao.com/makerdao-mcd-faqs/faqs/dsr'}],
     numberOfInteractions: 5,
     outperformsDuring: ['Choppy Markets'],
     whatHappensUnderTheHood: '',
