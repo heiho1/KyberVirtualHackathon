@@ -36,7 +36,23 @@ const MODERATE_BULL_ABI = [
   },
   {
     constant: false,
-    inputs: [],
+    inputs: [
+      {
+        internalType: 'address payable',
+        name: '_toWhomToIssue',
+        type: 'address'
+      },
+      {
+        internalType: 'uint256',
+        name: '_sBTCPercentage',
+        type: 'uint256'
+      },
+      {
+        internalType: 'uint256',
+        name: '_slippage',
+        type: 'uint256'
+      }
+    ],
     name: 'LetsInvest',
     outputs: [
       {
@@ -50,51 +66,62 @@ const MODERATE_BULL_ABI = [
     type: 'function'
   },
   {
+    constant: false,
+    inputs: [],
+    name: 'destruct',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'contract IERC20',
+        name: '_TokenAddress',
+        type: 'address'
+      }
+    ],
+    name: 'inCaseTokengetsStuck',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_a1',
+        type: 'address'
+      },
+      {
+        internalType: 'address',
+        name: '_a2',
+        type: 'address'
+      }
+    ],
+    name: 'initialize',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
     constant: true,
     inputs: [],
-    name: 'balance',
+    name: 'isOwner',
     outputs: [
       {
-        internalType: 'uint256',
+        internalType: 'bool',
         name: '',
-        type: 'uint256'
+        type: 'bool'
       }
     ],
     payable: false,
     stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [],
-    name: 'checkAndWithdraw_sBTC',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [],
-    name: 'checkAndWithdraw_sETH',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [],
-    name: 'depositETH',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    payable: true,
-    stateMutability: 'payable',
     type: 'function'
   },
   {
@@ -104,51 +131,6 @@ const MODERATE_BULL_ABI = [
     outputs: [
       {
         internalType: 'address payable',
-        name: '',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'sBTCContract',
-    outputs: [
-      {
-        internalType: 'contract ERC20',
-        name: '',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'sBTCPercentage',
-    outputs: [
-      {
-        internalType: 'uint32',
-        name: '',
-        type: 'uint32'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'sETHContract',
-    outputs: [
-      {
-        internalType: 'contract ERC20',
         name: '',
         type: 'address'
       }
@@ -189,44 +171,8 @@ const MODERATE_BULL_ABI = [
   },
   {
     constant: false,
-    inputs: [
-      {
-        internalType: 'contract ERC20',
-        name: '_sBTCContract',
-        type: 'address'
-      }
-    ],
-    name: 'set_sBTCContract',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        internalType: 'uint32',
-        name: '_sBTCPercentage',
-        type: 'uint32'
-      }
-    ],
-    name: 'set_sBTCPercentage',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        internalType: 'contract ERC20',
-        name: '_sETHContract',
-        type: 'address'
-      }
-    ],
-    name: 'set_sETHContract',
+    inputs: [],
+    name: 'toggleContractActive',
     outputs: [],
     payable: false,
     stateMutability: 'nonpayable',

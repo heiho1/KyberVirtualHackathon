@@ -1,47 +1,125 @@
 const SHORT_TERM_BULL_ABI = [
   {
-    constant: false,
-    inputs: [],
-    name: 'depositETH',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
-      }
-    ],
     payable: true,
     stateMutability: 'payable',
+    type: 'fallback'
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'Invest2Fulcrum2xLong_BTCContract',
+    outputs: [
+      {
+        internalType: 'contract Invest2Fulcrum2xLongBTC',
+        name: '',
+        type: 'address'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
     type: 'function'
   },
   {
-    constant: false,
+    constant: true,
     inputs: [],
-    name: 'LetsInvest',
+    name: 'Invest2Fulcrum2xLong_ETHContract',
     outputs: [
       {
-        internalType: 'uint256',
+        internalType: 'contract Invest2Fulcrum2xLongETH',
         name: '',
-        type: 'uint256'
+        type: 'address'
       }
     ],
-    payable: true,
-    stateMutability: 'payable',
+    payable: false,
+    stateMutability: 'view',
     type: 'function'
   },
   {
     constant: false,
     inputs: [
       {
-        internalType: 'uint32',
-        name: '_BTC2xLongPercentage',
-        type: 'uint32'
+        internalType: 'address',
+        name: '_towhomtoIssueAddress',
+        type: 'address'
+      },
+      {
+        internalType: 'uint256',
+        name: '_BTC2xLongAllocation',
+        type: 'uint256'
+      },
+      {
+        internalType: 'uint256',
+        name: '_slippage',
+        type: 'uint256'
       }
     ],
-    name: 'set_BTC2xLongPercentage',
+    name: 'LetsInvest',
+    outputs: [],
+    payable: true,
+    stateMutability: 'payable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [],
+    name: 'destruct',
     outputs: [],
     payable: false,
     stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'contract IERC20',
+        name: '_TokenAddress',
+        type: 'address'
+      }
+    ],
+    name: 'inCaseTokengetsStuck',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [],
+    name: 'initialize',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'isOwner',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'owner',
+    outputs: [
+      {
+        internalType: 'address payable',
+        name: '',
+        type: 'address'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
     type: 'function'
   },
   {
@@ -76,6 +154,15 @@ const SHORT_TERM_BULL_ABI = [
   },
   {
     constant: false,
+    inputs: [],
+    name: 'toggleContractActive',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
     inputs: [
       {
         internalType: 'address payable',
@@ -90,92 +177,12 @@ const SHORT_TERM_BULL_ABI = [
     type: 'function'
   },
   {
-    payable: true,
-    stateMutability: 'payable',
-    type: 'fallback'
-  },
-  {
     constant: false,
     inputs: [],
     name: 'withdraw',
     outputs: [],
     payable: false,
     stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'balance',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'BTC2xLongPercentage',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'Invest2Fulcrum2xLong_BTCContract',
-    outputs: [
-      {
-        internalType: 'contract Invest2Fulcrum2xLongBTC',
-        name: '',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'Invest2Fulcrum2xLong_ETHContract',
-    outputs: [
-      {
-        internalType: 'contract Invest2Fulcrum2xLongETH',
-        name: '',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'owner',
-    outputs: [
-      {
-        internalType: 'address payable',
-        name: '',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
     type: 'function'
   }
 ];

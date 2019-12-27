@@ -41,9 +41,19 @@ const LandingPage = () => (
       <div className="text-center py-1 mb-2">
         <h4 className="pt-1">DeFiZap</h4>
         <div className="text-muted">
-          Please note that DeFiZap is not a licensed financial advisor under any
-          law. Please consult your own independent investment advisor before
-          making any investment decisions.
+          <p>
+            Please note that DeFiZap is an experimental project. DeFiZap is not
+            providing any investment advisory or recommendation service. By
+            using DeFiZap or its services, you agree that you are using the
+            Services at your own risk and that you will not and do not hold
+            DeFiZap or its team members liable should the services not perform
+            as per your expectation.
+          </p>
+          <p>
+            DeFiZap is not a licensed financial advisor under any law. Please
+            consult your own independent investment advisor before making any
+            investment decisions.
+          </p>
         </div>
       </div>
     </Container>

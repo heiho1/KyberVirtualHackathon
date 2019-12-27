@@ -1,36 +1,8 @@
 const ETHMAXIMALIST_ABI = [
   {
-    constant: false,
-    inputs: [],
-    name: 'toggleContractActive',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '_numberPercentageValue',
-        type: 'uint256'
-      }
-    ],
-    name: 'change_cDAIAllocation',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [],
-    name: 'withdraw',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function'
+    payable: true,
+    stateMutability: 'payable',
+    type: 'fallback'
   },
   {
     constant: true,
@@ -41,6 +13,100 @@ const ETHMAXIMALIST_ABI = [
         internalType: 'contract Invest2Fulcrum1xShortBTC',
         name: '',
         type: 'address'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'Invest2FulcrumAddress',
+    outputs: [
+      {
+        internalType: 'contract Invest2Fulcrum',
+        name: '',
+        type: 'address'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_towhomtoIssueAddress',
+        type: 'address'
+      },
+      {
+        internalType: 'uint256',
+        name: '_ShortBTCAllocation',
+        type: 'uint256'
+      },
+      {
+        internalType: 'uint256',
+        name: '_slippage',
+        type: 'uint256'
+      }
+    ],
+    name: 'LetsInvest',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool'
+      }
+    ],
+    payable: true,
+    stateMutability: 'payable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [],
+    name: 'destruct',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'contract IERC20',
+        name: '_TokenAddress',
+        type: 'address'
+      }
+    ],
+    name: 'inCaseTokengetsStuck',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [],
+    name: 'initialize',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'isOwner',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool'
       }
     ],
     payable: false,
@@ -63,63 +129,42 @@ const ETHMAXIMALIST_ABI = [
     type: 'function'
   },
   {
-    constant: true,
-    inputs: [],
-    name: 'ShortBTCAllocation',
-    outputs: [
+    constant: false,
+    inputs: [
       {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
+        internalType: 'contract Invest2Fulcrum1xShortBTC',
+        name: '_Invest2Fulcrum1xShortBTCContract',
+        type: 'address'
       }
     ],
+    name: 'set_Invest2Fulcrum1xShortBTCContract',
+    outputs: [],
     payable: false,
-    stateMutability: 'view',
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'contract Invest2Fulcrum',
+        name: '_Invest2FulcrumAddress',
+        type: 'address'
+      }
+    ],
+    name: 'set_Invest2FulcrumAddress',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
     type: 'function'
   },
   {
     constant: false,
     inputs: [],
-    name: 'ETHMaximalistZAP',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool'
-      }
-    ],
-    payable: true,
-    stateMutability: 'payable',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'balance',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
-      }
-    ],
+    name: 'toggleContractActive',
+    outputs: [],
     payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'Invest2FulcrumContract',
-    outputs: [
-      {
-        internalType: 'contract Invest2Fulcrum',
-        name: '',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
+    stateMutability: 'nonpayable',
     type: 'function'
   },
   {
@@ -140,28 +185,11 @@ const ETHMAXIMALIST_ABI = [
   {
     constant: false,
     inputs: [],
-    name: 'depositETH',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    payable: true,
-    stateMutability: 'payable',
-    type: 'function'
-  },
-  {
-    inputs: [],
+    name: 'withdraw',
+    outputs: [],
     payable: false,
     stateMutability: 'nonpayable',
-    type: 'constructor'
-  },
-  {
-    payable: true,
-    stateMutability: 'payable',
-    type: 'fallback'
+    type: 'function'
   }
 ];
 

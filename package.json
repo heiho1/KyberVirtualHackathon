@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-brands-svg-icons": "^5.12.0",
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "@fortawesome/react-fontawesome": "^0.1.8",
     "@material-ui/core": "^4.7.0",
@@ -38,6 +39,7 @@
     "lodash": "^4.17.15",
     "numeral": "^2.0.6",
     "pooltogetherjs": "pooltogether/pooltogetherjs",
+    "humanize-plus": "^1.8.2",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-autobind": "^1.0.6",

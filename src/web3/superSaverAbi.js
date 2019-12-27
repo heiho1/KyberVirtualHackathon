@@ -1,12 +1,64 @@
 const SUPER_SAVER_ABI = [
   {
-    constant: false,
+    payable: true,
+    stateMutability: 'payable',
+    type: 'fallback'
+  },
+  {
+    constant: true,
     inputs: [],
+    name: 'Invest2FulcrumAddress',
+    outputs: [
+      {
+        internalType: 'contract Invest2Fulcrum',
+        name: '',
+        type: 'address'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'Invest2cDAIAddress',
+    outputs: [
+      {
+        internalType: 'contract Invest2cDAI',
+        name: '',
+        type: 'address'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_towhomtoIssueAddress',
+        type: 'address'
+      },
+      {
+        internalType: 'uint256',
+        name: '_cDAIAllocation',
+        type: 'uint256'
+      },
+      {
+        internalType: 'uint256',
+        name: '_slippage',
+        type: 'uint256'
+      }
+    ],
     name: 'LetsInvest',
     outputs: [
       {
+        internalType: 'bool',
         name: '',
-        type: 'uint256'
+        type: 'bool'
       }
     ],
     payable: true,
@@ -15,13 +67,8 @@ const SUPER_SAVER_ABI = [
   },
   {
     constant: false,
-    inputs: [
-      {
-        name: '_Invest2FulcrumiDAIContract',
-        type: 'address'
-      }
-    ],
-    name: 'set_Invest2FulcrumiDAIContract',
+    inputs: [],
+    name: 'destruct',
     outputs: [],
     payable: false,
     stateMutability: 'nonpayable',
@@ -31,11 +78,111 @@ const SUPER_SAVER_ABI = [
     constant: false,
     inputs: [
       {
-        name: '_numberPercentageValue',
-        type: 'uint256'
+        internalType: 'contract IERC20',
+        name: '_TokenAddress',
+        type: 'address'
       }
     ],
-    name: 'change_cDAIAllocation',
+    name: 'inCaseTokengetsStuck',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_Invest2cDAIAddress',
+        type: 'address'
+      }
+    ],
+    name: 'initialize',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'isOwner',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: 'owner',
+    outputs: [
+      {
+        internalType: 'address payable',
+        name: '',
+        type: 'address'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'contract Invest2Fulcrum',
+        name: '_Invest2FulcrumAddress',
+        type: 'address'
+      }
+    ],
+    name: 'set_Invest2FulcrumAddress',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'contract Invest2cDAI',
+        name: '_Invest2cDAIAddress',
+        type: 'address'
+      }
+    ],
+    name: 'set_Invest2cDAIAddress',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [],
+    name: 'toggleContractActive',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'address payable',
+        name: 'newOwner',
+        type: 'address'
+      }
+    ],
+    name: 'transferOwnership',
     outputs: [],
     payable: false,
     stateMutability: 'nonpayable',
@@ -49,123 +196,6 @@ const SUPER_SAVER_ABI = [
     payable: false,
     stateMutability: 'nonpayable',
     type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'cDAIPercentage',
-    outputs: [
-      {
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'owner',
-    outputs: [
-      {
-        name: '',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'balance',
-    outputs: [
-      {
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'Invest2FulcrumiDAIContract',
-    outputs: [
-      {
-        name: '',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: 'newOwner',
-        type: 'address'
-      }
-    ],
-    name: 'transferOwnership',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: '_Invest2cDAIContract',
-        type: 'address'
-      }
-    ],
-    name: 'set_Invest2cDAIContract',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [],
-    name: 'depositETH',
-    outputs: [
-      {
-        name: '',
-        type: 'uint256'
-      }
-    ],
-    payable: true,
-    stateMutability: 'payable',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'Invest2cDAIContract',
-    outputs: [
-      {
-        name: '',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    payable: true,
-    stateMutability: 'payable',
-    type: 'fallback'
   }
 ];
 

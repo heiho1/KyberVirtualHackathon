@@ -7,6 +7,8 @@ import surveyList from '../../constants/SurveyQuestions';
 import surveyResponse from '../../constants/SurveyResults';
 import { registerEvent } from '../../api/googleAnalytics';
 import { SURVEY_COMPLETED } from '../../constants/googleAnalytics';
+import ZapStats from '../../api/zapStats'
+
 
 class SurveyPageContainer extends PureComponent {
   constructor(props) {
@@ -20,6 +22,11 @@ class SurveyPageContainer extends PureComponent {
       isResultsDisabled: true
     };
     autobind(this);
+  }
+
+  async componentDidMount(){
+    const stats = await ZapStats()
+    this.setState({stats})
   }
 
   onAnswer = answer => {
@@ -102,7 +109,8 @@ class SurveyPageContainer extends PureComponent {
       surveyComplete,
       activeStep,
       answers,
-      isResultsDisabled
+      isResultsDisabled,
+      stats
     } = this.state;
 
     return (
@@ -120,6 +128,7 @@ class SurveyPageContainer extends PureComponent {
         moveToStep={this.moveToStep}
         answers={answers}
         isResultsDisabled={isResultsDisabled}
+        stats={stats}
       />
     );
   }

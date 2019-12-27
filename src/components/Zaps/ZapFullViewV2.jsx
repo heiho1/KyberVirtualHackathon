@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
@@ -9,6 +8,7 @@ import autobind from 'react-autobind';
 // import ReturnSparkLine from '../ReturnSparkline';
 // import PercentageCircle from '../PercentageCircle';
 import BuyButtonContainer from '../BuyButton/BuyButtonContainer';
+import GiftButton from '../GiftButton';
 import Donut from '../PercentageDoughnut';
 import '../../App.css';
 
@@ -19,19 +19,25 @@ class ZapFullView extends PureComponent {
     autobind(this);
   }
 
+  numberWithCommas = x => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   render() {
+    const illustrations = require.context('../../assets/illustrations', true);
     const {
-      name,
-      components,
-      isOrderable,
       description,
-      output,
       hasReturnsChart,
       oneClickAccessTo,
       platformsUsed,
       metamaskInteractionsSaved,
       ensAddress,
-      gasLimitRequirement
+      gasLimitRequirement,
+      tokenInfo,
+      tokenAddress,
+      volume,
+      illustration,
+      stats
     } = this.props;
 
     return (
@@ -42,38 +48,79 @@ class ZapFullView extends PureComponent {
               <Donut data={this.props} />
             </Col>
           </Row>
-          {/* <Card.Title>
-            <div className="h1 bold">{name}</div>
-          </Card.Title> */}
           <br />
-          <BuyButtonContainer 
-            name={name} 
-            ensAddress={ensAddress} 
-            gasLimitRequirement={gasLimitRequirement} 
-            hasReturnsChart = {hasReturnsChart}
-            size="lg" 
-            isOrderable={isOrderable} 
-          />
+          <Row className="justify-content-center mt-3 mb-2 px-4">
+            <Col xs={12} md={6} className="justify-content-center text-center">
+              <BuyButtonContainer {...this.props} size="md" />
+            </Col>
+          </Row>
+          <Row className="justify-content-center mb-4 px-4">
+            <Col xs={12} md={6} className="justify-content-center text-center">
+              <GiftButton {...this.props} size="md" />
+            </Col>
+
+          </Row>
+
           <Row className="justify-content-center align-text-center">
             <Col xs={12} md={6} className="justify-content-center text-center">
               {oneClickAccessTo ? (
                 <span>
-                  <h5 className="zapFullViewHeader"> 1-click access to:</h5>
+                  <h5
+                    style={{ fontSize: '0.9em' }}
+                    className="zapFullViewHeader"
+                  >
+                    {' '}
+                    1-CLICK ACCESS TO:
+                  </h5>
                   <h5>
                     {oneClickAccessTo.map((access, index) => (
-                      <Badge
-                        key={access.text}
-                        style={{backgroundColor:access.color}}
-                        variant="primary"
-                        className={index === 0 ? 'beforePill' : 'afterPill'}
-                      >
-                        {access.text}
-                      </Badge>
+                      <Row key={access.text} className="justify-content-center">
+                        <Badge
+                          key={access.text}
+                          style={{ backgroundColor: access.color }}
+                          variant="primary"
+                          className={index === 0 ? 'beforePill' : 'afterPill'}
+                        >
+                          {access.text}
+                        </Badge>
+                      </Row>
                     ))}
                   </h5>
                 </span>
               ) : null}
-              {this.props.whatThisMeans ? (
+              {platformsUsed ? (
+                <span>
+                  <h5 style={{ fontSize: '0.9em' }}>PLATFORMS USED:</h5>
+                  <h5>
+                    {platformsUsed.map((platform, index) => (
+                      <a
+                        href={platform.url}
+                        key={platform.value}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <Badge
+                          style={{ backgroundColor: platform.color }}
+                          variant="success"
+                          // className={index === 0 ? 'beforePill' : 'afterPill'}
+                          className="badgePadding"
+                        >
+                          {platform.value}
+                        </Badge>
+                      </a>
+                    ))}
+                  </h5>
+                </span>
+              ) : null}
+              <h5 style={{ fontSize: '0.9em' }} className="pt-2">
+                WHAT THIS MEANS:
+              </h5>
+              {illustration ? (
+                <img
+                  className="pb-2"
+                  src={illustrations(`./${illustration}`)}
+                />
+              ) : this.props.whatThisMeans ? (
                 <span>
                   <h5>What this means:</h5>
                   <ul>
@@ -85,82 +132,75 @@ class ZapFullView extends PureComponent {
                   </ul>
                 </span>
               ) : null}
-              {platformsUsed ? (
-                <span>
-                  <h5>Platforms used: </h5>
-                  <h5>
-                    {platformsUsed.map((platform, index) => (
-                      <a
-                        href={platform.url}
-                        key={platform.value}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        <Badge
-                        style={{backgroundColor:platform.color}}
-                          variant="success"
-                          className={index === 0 ? 'beforePill' : 'afterPill'}
-                        >
-                          {platform.value}
-                        </Badge>
-                      </a>
-                    ))}
-                  </h5>
-                </span>
-              ) : null}
               {metamaskInteractionsSaved ? (
                 <span>
-                  <h5>
-                  Wallet interactions saved:
+                  <h5 style={{ fontSize: '0.9em' }}>
+                    WALLET INTERACTIONS SAVED:
                   </h5>
-                  <h1>
+                  <b style={{ fontSize: '1.8em' }}>
                     {metamaskInteractionsSaved.map(
                       interactions => interactions.saved
                     )}
-                  </h1>
+                  </b>
+                </span>
+              ) : null}
+              {stats ? (
+                <span>
+                  <h6 style={{ fontSize: '0.9em' }}>
+                    DEPLOYED THROUGH THIS ZAP:
+                  </h6>
+                  <h6>
+                    <b style={{ fontSize: '1.8em' }}>
+                      {stats.volumeETH ? this.numberWithCommas(stats.volumeETH.toFixed(0)) : '-'} ETH
+                    </b>
+                    <p
+                      className="pt-1"
+                      style={{ fontSize: '0.6em', opacity: '70%' }}
+                    >
+                      Updated {new Date(stats.updated).toLocaleString()}
+                    </p>
+                  </h6>
                 </span>
               ) : null}
               {ensAddress ? (
                 <span>
-                  <h5>
-                    View contract on Etherscan
-                </h5>
+                  <h5 style={{ fontSize: '0.9em' }}>
+                    VIEW CONTRACT ON ETHERSCAN:
+                  </h5>
                   <h5>
                     <a
                       href={`https://etherscan.io/address/${ensAddress}`}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
-                      <Badge
-                        variant="info"
-                      >
-                        {ensAddress}
-                      </Badge>
+                      <Badge variant="info">{ensAddress}</Badge>
                     </a>
                   </h5>
-              <p style={{fontSize:'0.75em'}}>Alternatively send ETH directly to this address using<i> minimum </i>{gasLimitRequirement} gas.</p>
+                  <p style={{ fontSize: '0.75em' }}>
+                    Alternatively send ETH directly to this address using
+                    <i> minimum </i>
+                    {gasLimitRequirement} gas.
+                  </p>
                 </span>
               ) : null}
+              <a
+                href={description.tutorialLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="my-1"
+              >
+                <h5>View Detailed Tutorial</h5>
+              </a>
               <div className="mt-2">
-                <Button
-                  href={description.tutorialLink}
-                  variant="outline-primary"
-                  target="_blank"
-                  size="lg"
-                  className="m-2"
-                >
-                  View Tutorial
-                </Button>
-                {this.props.hasReturnsChart ? (
-                  <Button
-                    href={`https://pools.fyi/#/returns/${this.props.tokenAddress}`}
-                    variant="outline-primary"
+                {hasReturnsChart ? (
+                  <a
+                    href={`https://pools.fyi/#/returns/${tokenAddress}`}
                     target="_blank"
-                    size="lg"
-                    className="m-2"
+                    rel="noopener noreferrer"
+                    className="my-1"
                   >
-                    Pools.fyi
-                  </Button>
+                    <h5>View Returns on Pools.fyi</h5>
+                  </a>
                 ) : null}
               </div>
             </Col>

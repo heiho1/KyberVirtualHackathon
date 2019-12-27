@@ -1,31 +1,53 @@
 const Zaps = {
-  unipoolchai: {
-    id: 'unipoolchai',
-    name: 'CHAI Unipool',
-    text: 'Uni CHAI',
+  unipoolcdai: {
+    id: 'unipoolcdai',
+    name: 'cDAI Unipool',
+    text: 'Uni cDAI',
     isOrderable: true,
     hasReturnsChart: true,
-    ensAddress: 'CHAIUnipool.DeFiZap.eth',
-    tokenAddress: '0x6c3942b383bc3d0efd3f36efa1cbe7c8e12c8a2b ',
-    gasLimitRequirement:'1500000',
+    ensAddress: 'cDAIPool.DeFiZap.eth',
+    tokenAddress: '0x34E89740adF97C3A9D3f63Cc2cE4a914382c230b',
+    tokenInfo: {
+      address: '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643',
+      name: 'cDAI',
+      decimals: 8
+    },
+    gasLimitRequirement: '1500000',
+    volume: '8',
+    illustration: 'cdai_illustration.svg',
     platformsUsed: [
       {
         key: 'uniswap',
         value: 'Uniswap',
         url: 'https://uniswap.io/',
         color: '#AF2CE4'
+      },
+      {
+        key: 'kyber',
+        value: 'Kyber',
+        url: 'https://kyberswap.com/swap/',
+        color: '#FB795D'
+      },
+      {
+        key: 'Compound',
+        value: 'Compound',
+        url: 'https://compound.finance/',
+        color: '#28A745'
       }
     ],
-    oneClickAccessTo: [{ text: 'Add Liquidity to generate fees', color:'#18722b' }],
+    oneClickAccessTo: [
+      { text: '🦄 Pooling', color: '#66098e' },
+      { text: '💸 Lending', color: '#63d37b' }
+    ],
     numberOfInteractions: 5,
     outperformsDuring: ['Choppy Markets'],
     whatHappensUnderTheHood: '',
     whatHappensAfter: '',
     components: [
       {
-        name: 'CHAI Pool token',
+        name: 'cDAI Pool token',
         percent: 100,
-        color: '#ad7213'
+        color: '#00D395'
       }
     ],
     description: {
@@ -38,16 +60,75 @@ const Zaps = {
         }
       ],
       tutorialLink:
-        'https://defitutorials.substack.com/p/chai-unipool-defizap-tutorial'
+        'https://defitutorials.substack.com/p/chai-unipool-defizap-tutorial-9e2'
     },
     whatThisMeans: {
       text: [
-        '50% of your ETH input is first converted to DAI on Kyber to avoid ETH->CHAI slippage',
-        'Converted DAI is then wrapped into CHAI. Learn more on chai.money',
-        'CHAI + other 50% ETH input are added to the ETH/CHAI Liquidity Pool on Uniswap and you receive minted liquidity tracking tokens back to your wallet.'
+        '50% of your ETH input is first converted to DAI on Kyber to avoid ETH<>cDAI slippage',
+        'Converted DAI is then supplied on Compound to mint cDAI',
+        'cDAI + other 50% ETH input are added to the ETH/cDAI Liquidity Pool on Uniswap. Receive minted liquidity tracking tokens back to your wallet.'
       ]
     },
     metamaskInteractionsSaved: [{ saved: 5 }]
+  },
+  unipoolseth: {
+    id: 'unipoolseth',
+    name: 'sETH Unipool',
+    text: 'Uni sETH',
+    isOrderable: true,
+    hasReturnsChart: true,
+    ensAddress: 'sETHUnipool.DeFiZap.eth',
+    tokenAddress: '0xe9cf7887b93150d4f2da7dfc6d502b216438f244',
+    tokenInfo: {
+      address: '0x5e74C9036fb86BD7eCdcb084a0673EFc32eA31cb',
+      name: 'sETH',
+      decimals: 18
+    },
+    gasLimitRequirement: '1500000',
+    volume: 1499,
+    illustration: 'sETH_illustration.svg',
+    platformsUsed: [
+      {
+        key: 'uniswap',
+        value: 'Uniswap',
+        url: 'https://uniswap.io/',
+        color: '#AF2CE4'
+      }
+    ],
+    oneClickAccessTo: [
+      { text: '🦄 Pooling', color: '#66098e' },
+      { text: '⛽ Staking Rewards', color: '#6C757D' }
+    ],
+    numberOfInteractions: 5,
+    outperformsDuring: ['Choppy Markets'],
+    whatHappensUnderTheHood: '',
+    whatHappensAfter: '',
+    components: [
+      {
+        name: 'sETH Pool token',
+        percent: 100,
+        color: '#6C757D'
+      }
+    ],
+    description: {
+      textQuestion: 'What does this Zap do?',
+      textAnswer: ['Sample text'],
+      textLink: [
+        {
+          text: 'dummy text',
+          hyperlink: 'https://google.com'
+        }
+      ],
+      tutorialLink:
+        'https://defitutorials.substack.com/p/seth-unipool-defizap-tutorial'
+    },
+    whatThisMeans: {
+      text: [
+        '50% converted to sETH',
+        '50% leftover input + acquired tokens are added to the sETH/ETH Liquidity pool on Uniswap. Receive minted liquidity tracking tokens back to your wallet.'
+      ]
+    },
+    metamaskInteractionsSaved: [{ saved: 3 }]
   },
   unipooldai: {
     id: 'unipooldai',
@@ -57,7 +138,15 @@ const Zaps = {
     hasReturnsChart: true,
     ensAddress: 'DAIUnipool.DeFiZap.eth',
     tokenAddress: '0x2a1530c4c41db0b0b2bb646cb5eb1a67b7158667',
-    gasLimitRequirement:'1500000',
+    tokenInfo: {
+      address: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+      name: 'DAI',
+      decimals: 18,
+      icon: 'dai_logo.svg'
+    },
+    gasLimitRequirement: '1500000',
+    volume: '179',
+
     platformsUsed: [
       {
         key: 'uniswap',
@@ -66,7 +155,7 @@ const Zaps = {
         color: '#AF2CE4'
       }
     ],
-    oneClickAccessTo: [{ text: 'Add Liquidity to generate fees', color:'#18722b' }],
+    oneClickAccessTo: [{ text: '🦄 Pooling', color: '#66098e' }],
     numberOfInteractions: 5,
     outperformsDuring: ['Choppy Markets'],
     whatHappensUnderTheHood: '',
@@ -93,7 +182,7 @@ const Zaps = {
     whatThisMeans: {
       text: [
         '50% converted to DAI',
-        '50% left over input + acquired tokens are supplied to Uniswap pool to mint liquidity tracking tokens'
+        '50% leftover input + acquired tokens are added to the DAI/ETH Liquidity pool on Uniswap. Receive minted liquidity tracking tokens back to your wallet.'
       ]
     },
     metamaskInteractionsSaved: [{ saved: 3 }]
@@ -106,17 +195,24 @@ const Zaps = {
     hasReturnsChart: true,
     ensAddress: 'MKRUnipool.DeFiZap.eth',
     tokenAddress: '0x2c4bd064b998838076fa341a83d007fc2fa50957',
-    gasLimitRequirement:'1500000',
+    tokenInfo: {
+      address: '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2',
+      name: 'MKR',
+      decimals: 18,
+      icon: 'maker_logo.svg'
+    },
+    gasLimitRequirement: '1500000',
+    volume: '118',
+    illustration: 'mkr_illustration.svg',
     platformsUsed: [
       {
         key: 'uniswap',
         value: 'Uniswap',
         url: 'https://uniswap.io/',
         color: '#AF2CE4'
-
       }
     ],
-    oneClickAccessTo: [{ text: 'Add Liquidity to generate fees', color:'#18722b' }],
+    oneClickAccessTo: [{ text: '🦄 Pooling', color: '#66098e' }],
     numberOfInteractions: 3,
     outperformsDuring: ['Choppy Markets'],
     whatHappensUnderTheHood: '',
@@ -125,7 +221,7 @@ const Zaps = {
       {
         name: 'MKR Pool token',
         percent: 100,
-        color: '#D34FEE'
+        color: '#1AAB9B'
       }
     ],
     description: {
@@ -143,7 +239,7 @@ const Zaps = {
     whatThisMeans: {
       text: [
         '50% converted to MKR',
-        '50% left over input + acquired tokens are supplied to Uniswap pool to mint liquidity tracking tokens'
+        '50% leftover input + acquired tokens are added to the MKR/ETH Liquidity pool on Uniswap. Receive minted liquidity tracking tokens back to your wallet.'
       ]
     },
     metamaskInteractionsSaved: [{ saved: 3 }]
@@ -156,7 +252,14 @@ const Zaps = {
     hasReturnsChart: true,
     ensAddress: 'SNXUnipool.DeFiZap.eth',
     tokenAddress: '0x3958b4ec427f8fa24eb60f42821760e88d485f7f',
-    gasLimitRequirement:'1500000',
+    tokenInfo: {
+      address: '0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F',
+      name: 'SNX',
+      decimals: 18
+    },
+    gasLimitRequirement: '1500000',
+    volume: 42,
+    illustration: 'snx_illustration.svg',
     platformsUsed: [
       {
         key: 'uniswap',
@@ -165,7 +268,7 @@ const Zaps = {
         color: '#AF2CE4'
       }
     ],
-    oneClickAccessTo: [{ text: 'Add Liquidity to generate fees', color:'#18722b' }],
+    oneClickAccessTo: [{ text: '🦄 Pooling', color: '#66098e' }],
     numberOfInteractions: 5,
     outperformsDuring: ['Choppy Markets'],
     whatHappensUnderTheHood: '',
@@ -192,38 +295,58 @@ const Zaps = {
     whatThisMeans: {
       text: [
         '50% converted to SNX',
-        '50% left over input + acquired tokens are supplied to Uniswap pool to mint liquidity tracking tokens'
+        '50% leftover input + acquired tokens are added to the SNX/ETH Liquidity pool on Uniswap. Receive minted liquidity tracking tokens back to your wallet.'
       ]
     },
     metamaskInteractionsSaved: [{ saved: 3 }]
   },
-  unipoolseth: {
-    id: 'unipoolseth',
-    name: 'sETH Unipool',
-    text: 'Uni sETH',
+  unipoolchai: {
+    id: 'unipoolchai',
+    name: 'CHAI Unipool',
+    text: 'Uni CHAI',
     isOrderable: true,
     hasReturnsChart: true,
-    ensAddress: 'sETHUnipool.DeFiZap.eth',
-    tokenAddress: '0xe9cf7887b93150d4f2da7dfc6d502b216438f244',
-    gasLimitRequirement:'1500000',
+    ensAddress: 'CHAIUnipool.DeFiZap.eth',
+    tokenAddress: '0x6c3942b383bc3d0efd3f36efa1cbe7c8e12c8a2b',
+    tokenInfo: {
+      address: '0x06AF07097C9Eeb7fD685c692751D5C66dB49c215',
+      name: 'CHAI',
+      decimals: 18,
+      icon: 'chai_logo.svg'
+    },
+    gasLimitRequirement: '1500000',
+    volume: '32',
+    illustration: 'chai_illustration.svg',
     platformsUsed: [
       {
         key: 'uniswap',
         value: 'Uniswap',
         url: 'https://uniswap.io/',
         color: '#AF2CE4'
+      },
+      {
+        key: 'kyber',
+        value: 'Kyber',
+        url: 'https://kyberswap.com/swap/',
+        color: '#FB795D'
+      },
+      {
+        key: 'Maker',
+        value: 'Maker',
+        url: 'https://chai.money',
+        color: '#000000'
       }
     ],
-    oneClickAccessTo: [{ text: 'Add Liquidity to generate fees', color:'#18722b' }],
+    oneClickAccessTo: [{ text: '🦄 Pooling', color: '#66098e' }],
     numberOfInteractions: 5,
     outperformsDuring: ['Choppy Markets'],
     whatHappensUnderTheHood: '',
     whatHappensAfter: '',
     components: [
       {
-        name: 'sETH Pool token',
+        name: 'CHAI Pool token',
         percent: 100,
-        color: '#01D691'
+        color: '#DE3443'
       }
     ],
     description: {
@@ -236,65 +359,79 @@ const Zaps = {
         }
       ],
       tutorialLink:
-        'https://defitutorials.substack.com/p/seth-unipool-defizap-tutorial'
+        'https://defitutorials.substack.com/p/chai-unipool-defizap-tutorial'
     },
     whatThisMeans: {
       text: [
-        '50% converted to sETH',
-        '50% left over input + acquired tokens are supplied to Uniswap pool to mint liquidity tracking tokens'
+        '50% of your ETH input is first converted to DAI on Kyber to avoid ETH->CHAI slippage',
+        'Converted DAI is then wrapped into CHAI. Learn more on chai.money',
+        'CHAI + other 50% ETH input are added to the ETH/CHAI Liquidity Pool on Uniswap. Receive minted liquidity tracking tokens back to your wallet.'
       ]
     },
-    metamaskInteractionsSaved: [{ saved: 3 }]
+    metamaskInteractionsSaved: [{ saved: 5 }]
   },
-  unipoolsai: {
-    id: 'unipoolsai',
-    name: 'SAI Unipool',
-    text: 'Uni SAI',
+  doublebull: {
+    id: 'doublebull',
+    name: 'Double Bull',
+    text: 'Double-Bull',
     isOrderable: true,
-    hasReturnsChart: true,
-    ensAddress: 'SAIUnipool.DeFiZap.eth',
-    tokenAddress: '0x09cabec1ead1c0ba254b09efb3ee13841712be14',
-    gasLimitRequirement:'1500000',
-    platformsUsed: [
-      {
-        key: 'uniswap',
-        value: 'Uniswap',
-        url: 'https://uniswap.io/',
-        color: '#AF2CE4'
+    hasReturnsChart: false,
+    numberOfInteractions: 4,
+    ensAddress: 'DoubleBull.DeFiZap.eth',
+    gasLimitRequirement: '7000000',
+    volume: 21,
 
-      }
-    ],
-    oneClickAccessTo: [{ text: 'Adding Liquidity to generate fees', color:'#18722b' }],
-    numberOfInteractions: 5,
-    outperformsDuring: ['Choppy Markets'],
-    whatHappensUnderTheHood: '',
-    whatHappensAfter: '',
     components: [
       {
-        name: 'SAI Pool token',
-        percent: 100,
-        color: '#1F8FF9'
+        name: 'dLETH2x',
+        percent: 50,
+        color: '#007BFF'
+      },
+      {
+        name: 'dLWBTC2x',
+        percent: 50,
+        color: '#FFC107'
       }
     ],
     description: {
-      textQuestion: 'What does this Zap do?',
-      textAnswer: ['Sample text'],
+      textQuestion: 'What does Double Bull do?',
+      textAnswer: [
+        'Your deposit is automatically split into opening Perpetual (no expiration) 2x Long on ETH(dLETH2x) + BTC(dLWBTC2x).',
+        'For example, if you send 1 ETH to DoubleBull.DeFiZap.eth:',
+        ' - 0.5 of your ETH will go towards opening Perpetual BTC Long position with 2x leverage.',
+        ' - 0.5 ETH will be used to open Perpetual ETH Long with 2x leverage. This means you will have exposure to 1 ETH (0.5x2).',
+        'After sending your deposit, you will immediately receive allocated bZx tokens (dLETH2x+dLWBTC2x) which track your open margin trade positions.',
+        'Soon you will be able to manage your purchased assets right from DeFiZap Dashboard but for now you can visit Fulcrum.Trade to view your balances and trade your positions.'
+      ],
       textLink: [
         {
-          text: 'dummy text',
-          hyperlink: 'https://google.com'
+          text: 'Check out this tutorial to see how Fulcrum works.',
+          hyperlink:
+            'https://defitutorials.substack.com/p/margin-trading-with-fulcrum'
         }
       ],
       tutorialLink:
-        'https://defitutorials.substack.com/p/dai-unipool-defizap-tutorial'
+        'https://defitutorials.substack.com/p/double-bull-defizap-walk-through'
     },
     whatThisMeans: {
       text: [
-        '50% converted to SAI',
-        '50% left over input + acquired tokens are supplied to Uniswap pool to mint liquidity tracking tokens'
+        '50% used to open ETH Long position with 2X leverage on Fulcrum (dLETH2x)',
+        '50% used to open BTC Long position with 2X leverage on Fulcrum (dLWBTC2x)'
       ]
     },
-    metamaskInteractionsSaved: [{ saved: 3 }]
+    oneClickAccessTo: [
+      { text: '🚀 Long ETH with 2X Leverage', color: '#007BFF' },
+      { text: '🚀 Long BTC with 2X Leverage', color: '#FFC107' }
+    ],
+    platformsUsed: [
+      {
+        key: 'Fulcrum',
+        value: 'Fulcrum',
+        url: 'https://fulcrum.trade/#/',
+        color: '#407BF7'
+      }
+    ],
+    metamaskInteractionsSaved: [{ saved: 2 }]
   },
   lender: {
     id: 'lender',
@@ -304,26 +441,27 @@ const Zaps = {
     hasReturnsChart: false,
     numberOfInteractions: 4,
     ensAddress: 'Lender.DeFiZap.eth',
-    gasLimitRequirement:'7000000',
+    gasLimitRequirement: '7000000',
+    volume: 9,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 90,
-        color: '#11CEBE'
+        color: '#28A745'
       },
       {
         name: 'dLETH2x',
         percent: 10,
-        color: '#0035C4'
+        color: '#407BF7'
       }
     ],
     description: {
       textQuestion: 'What does this Zap do?',
       textAnswer: [
-        'Lender Zap allocates incoming deposits 90% to cSAI and 10% to dLETH2x.',
+        'Lender Zap allocates incoming deposits 90% to cDAI and 10% to dLETH2x.',
         'Therefore, if you send 1 ETH to this Lender.DeFiZap.eth, or buy from our website, 0.9 of your worth will go towards investing in Compound.Finance while 0.1 of your ETH will be used to open a Perpetual ETH Long with 2x leverage.',
-        "Lender's Zap is interesting because, within a year, the interest generated from cSAI could completely cover your margin trade purchase. Think of it as trading with your future interest earned.",
-        'After sending your ETH, you will immediately receive allocated tokens (cSAI+dLETH2x) which track your DAI lending balance + margin trade position. Once you receive these tokens you can visit Compound.Finance to view/withdraw interest earned and Fulcrum.Trade to view your ROI/ close position on dLETH2x.'
+        "Lender's Zap is interesting because, within a year, the interest generated from cDAI could completely cover your margin trade purchase. Think of it as trading with your future interest earned.",
+        'After sending your ETH, you will immediately receive allocated tokens (cDAI+dLETH2x) which track your DAI lending balance + margin trade position. Once you receive these tokens you can visit Compound.Finance to view/withdraw interest earned and Fulcrum.Trade to view your ROI/ close position on dLETH2x.'
       ],
       textLink: [
         {
@@ -342,13 +480,13 @@ const Zaps = {
     },
     whatThisMeans: {
       text: [
-        '90% auto-converted into SAI + supplied to Compound to mint cSAI',
+        '90% auto-converted into DAI + supplied to Compound to mint cDAI',
         '10% used to open ETH Long position with 2X leverage on Fulcrum (dLETH2x)'
       ]
     },
     oneClickAccessTo: [
-      { text: 'Lending',color:'#0bef3d' },
-      { text: 'Long ETH with 2X Leverage', color:'#007BFF' }
+      { text: '💸 Lending', color: '#63d37b' },
+      { text: '🚀 Long ETH with 2X Leverage', color: '#007BFF' }
     ],
     platformsUsed: [
       {
@@ -361,7 +499,13 @@ const Zaps = {
         key: 'Fulcrum',
         value: 'Fulcrum',
         url: 'https://fulcrum.trade/#/',
-        color:'#407BF7'
+        color: '#407BF7'
+      },
+      {
+        key: 'kyber',
+        value: 'Kyber',
+        url: 'https://kyberswap.com/swap/',
+        color: '#FB795D'
       }
     ],
     metamaskInteractionsSaved: [{ saved: 4 }]
@@ -374,17 +518,18 @@ const Zaps = {
     hasReturnsChart: false,
     numberOfInteractions: 6,
     ensAddress: 'EthBull.DeFiZap.eth',
-    gasLimitRequirement:'7000000',
+    gasLimitRequirement: '7000000',
+    volume: 6,
     components: [
       {
         name: 'dLETH2x',
         percent: 50,
-        color: '#5540BF'
+        color: '#007BFF'
       },
       {
         name: 'dsWBTC',
         percent: 50,
-        color: '#A726f2'
+        color: '#DC3545'
       }
     ],
     description: {
@@ -411,15 +556,15 @@ const Zaps = {
       ]
     },
     oneClickAccessTo: [
-      { text: 'Long ETH with 2X Leverage', color:'#007BFF' },
-      { text: 'Short-sell WBTC', color:'#DC3545' }
+      { text: '🚀 Long ETH with 2X Leverage', color: '#007BFF' },
+      { text: '🐻 Short BTC', color: '#DC3545' }
     ],
     platformsUsed: [
       {
         key: 'Fulcrum',
         value: 'Fulcrum',
         url: 'https://fulcrum.trade/#/',
-        color:'#407BF7'
+        color: '#407BF7'
       }
     ],
     metamaskInteractionsSaved: [{ saved: 2 }]
@@ -432,7 +577,8 @@ const Zaps = {
     hasReturnsChart: false,
     numberOfInteractions: 4,
     ensAddress: 'ModerateBull.DeFiZap.eth',
-    gasLimitRequirement:'2000000',
+    gasLimitRequirement: '2000000',
+    volume: 5,
     components: [
       {
         name: 'sETH',
@@ -470,80 +616,21 @@ const Zaps = {
         'https://defitutorials.substack.com/p/moderate-bull-defizap-walk-through'
     },
     whatThisMeans: {
-      text: ['50% used to acquire sBTC', '50% used to acquire sETH']
+      text: [
+        '50% used to acquire sBTC on Synthetix exchange.',
+        '50% used to acquire sETH on Synthetix exchange.'
+      ]
     },
-    oneClickAccessTo: [{ text: 'Synthetic Asset Trading', color:'#6C757D' }],
+    oneClickAccessTo: [{ text: '📊 Synthetic Assets', color: '#6C757D' }],
     platformsUsed: [
       {
         key: 'Synthetix',
         value: 'Synthetix',
-        url: 'https://https://synthetix.exchange/',
-        color: '#282C34'
+        url: 'https://synthetix.exchange/',
+        color: '#5F6E98'
       }
     ],
     metamaskInteractionsSaved: [{ saved: 3 }]
-  },
-  doublebull: {
-    id: 'doublebull',
-    name: 'Double Bull',
-    text: 'Double-Bull',
-    isOrderable: true,
-    hasReturnsChart: false,
-    numberOfInteractions: 4,
-    ensAddress: 'DoubleBull.DeFiZap.eth',
-    gasLimitRequirement:'7000000',
-    components: [
-      {
-        name: 'dLETH2x',
-        percent: 50,
-        color: '#D42351'
-      },
-      {
-        name: 'dLWBTC2x',
-        percent: 50,
-        color: '#6E2001'
-      }
-    ],
-    description: {
-      textQuestion: 'What does Double Bull do?',
-      textAnswer: [
-        'Your deposit is automatically split into opening Perpetual (no expiration) 2x Long on ETH(dLETH2x) + BTC(dLWBTC2x).',
-        'For example, if you send 1 ETH to DoubleBull.DeFiZap.eth:',
-        ' - 0.5 of your ETH will go towards opening Perpetual BTC Long position with 2x leverage.',
-        ' - 0.5 ETH will be used to open Perpetual ETH Long with 2x leverage. This means you will have exposure to 1 ETH (0.5x2).',
-        'After sending your deposit, you will immediately receive allocated bZx tokens (dLETH2x+dLWBTC2x) which track your open margin trade positions.',
-        'Soon you will be able to manage your purchased assets right from DeFiZap Dashboard but for now you can visit Fulcrum.Trade to view your balances and trade your positions.'
-      ],
-      textLink: [
-        {
-          text: 'Check out this tutorial to see how Fulcrum works.',
-          hyperlink:
-            'https://defitutorials.substack.com/p/margin-trading-with-fulcrum'
-        }
-      ],
-      tutorialLink:
-        'https://defitutorials.substack.com/p/double-bull-defizap-walk-through'
-    },
-    whatThisMeans: {
-      text: [
-        '50% used to open ETH Long position with 2X leverage on Fulcrum (dLETH2x)',
-        '50% used to open BTC Long position with 2X leverage on Fulcrum (dLWBTC2x)'
-      ]
-    },
-    oneClickAccessTo: [
-      { text: 'Long ETH with 2X Leverage', color:'#007BFF' },
-      { text: 'Long BTC with 2X Leverage', color:'#FFC107' }
-    ],
-    platformsUsed: [
-      {
-        key: 'Fulcrum',
-        value: 'Fulcrum',
-        url: 'https://fulcrum.trade/#/',
-        color:'#407BF7'
-
-      }
-    ],
-    metamaskInteractionsSaved: [{ saved: 2 }]
   },
   supersaver: {
     id: 'supersaver',
@@ -553,26 +640,27 @@ const Zaps = {
     hasReturnsChart: false,
     numberOfInteractions: 5,
     ensAddress: 'SuperSaver.DeFiZap.eth',
-    gasLimitRequirement:'3000000',
+    gasLimitRequirement: '3000000',
+    volume: 0,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 50,
-        color: '#01D691'
+        color: '#28A745'
       },
       {
-        name: 'iSAI',
+        name: 'iDAI',
         percent: 50,
-        color: '#0062CD'
+        color: '#407BF7'
       }
     ],
     description: {
       textQuestion: 'What does SuperSaver Zap do?',
       textAnswer: [
-        'Your deposit is automatically allocated 50% to cSAI and 50% to iSAI which represent your DAI supply balances on Compound and Fulcrum',
+        'Your deposit is automatically allocated 50% to cDAI and 50% to iDAI which represent your DAI supply balances on Compound and Fulcrum',
         'For example, if you send 1 ETH to SuperSaver.DeFiZap.Eth:',
-        '- 0.5 of your ETH will be converted to cSAI.',
-        '- 0.5 of your ETH will be converted to iSAI.',
+        '- 0.5 of your ETH will be converted to cDAI.',
+        '- 0.5 of your ETH will be converted to iDAI.',
         'After sending your deposit, you will immediately receive allocated tokens.',
         "Soon you will be able to manage these tokens right from DeFiZap Dashboard but for now you can visit Compound + Fulcrum to see how much interest you've earned or make a withdrawal."
       ],
@@ -593,11 +681,11 @@ const Zaps = {
     },
     whatThisMeans: {
       text: [
-        '50% auto-converted into SAI + supplied to Compound to mint cSAI',
-        '50% auto-converted into SAI + supplied to Fulcrum to mint iSAI'
+        '50% auto-converted into DAI + supplied to Compound to mint cDAI',
+        '50% auto-converted into DAI + supplied to Fulcrum to mint iDAI'
       ]
     },
-    oneClickAccessTo: [{ text: 'Lending', color:'#0bef3d' }],
+    oneClickAccessTo: [{ text: '💸 Lending', color: '#63d37b' }],
     platformsUsed: [
       {
         key: 'Compound',
@@ -609,20 +697,24 @@ const Zaps = {
         key: 'Fulcrum',
         value: 'Fulcrum',
         url: 'https://fulcrum.trade/#/',
-        color:'#407BF7'
-
+        color: '#407BF7'
+      },
+      {
+        key: 'Kyber',
+        value: 'Kyber',
+        url: 'https://kyberswap.com/swap/',
+        color: '#FB795D'
       }
     ],
     metamaskInteractionsSaved: [{ saved: 4 }]
   },
-
   bullSharpe: {
     id: 'bullSharpe',
     name: 'Conservative Bull',
     isOrderable: false,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 90
       },
       {
@@ -637,7 +729,7 @@ const Zaps = {
     isOrderable: false,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 90
       },
       {
@@ -652,7 +744,7 @@ const Zaps = {
     isOrderable: false,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 50
       },
       {
@@ -671,7 +763,7 @@ const Zaps = {
     isOrderable: false,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 50
       },
       {
@@ -690,7 +782,7 @@ const Zaps = {
     isOrderable: false,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 20
       },
       {
@@ -709,7 +801,7 @@ const Zaps = {
     isOrderable: false,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 20
       },
       {
@@ -747,7 +839,7 @@ const Zaps = {
     isOrderable: false,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 25
       },
       {
@@ -770,7 +862,7 @@ const Zaps = {
     isOrderable: false,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 25
       },
       {
@@ -789,7 +881,7 @@ const Zaps = {
     isOrderable: false,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 50
       },
       {
@@ -823,7 +915,7 @@ const Zaps = {
     isOrderable: false,
     components: [
       {
-        name: 'cSAI',
+        name: 'cDAI',
         percent: 50
       },
       {

@@ -3,7 +3,6 @@ import isEmpty from 'lodash/isEmpty';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
-// import ZapFullView from './ZapFullView';
 import ZapFullViewV2 from './ZapFullViewV2';
 import NavigationBar from '../NavigationBar';
 

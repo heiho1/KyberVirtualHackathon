@@ -1,121 +1,107 @@
-const UNIPOOL_SAI_ABI = [
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_SAI_TokenContractAddress',
-        type: 'address'
-      },
-      {
-        internalType: 'contract UniSwapAddLiquityV2_General',
-        name: '_UniSwapAddLiquityV2_GeneralAddress',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'constructor'
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'previousOwner',
-        type: 'address'
-      },
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address'
-      }
-    ],
-    name: 'OwnershipTransferred',
-    type: 'event'
-  },
+const LENDER_ABI = [
   {
     payable: true,
     stateMutability: 'payable',
     type: 'fallback'
   },
   {
-    constant: false,
+    constant: true,
     inputs: [],
-    name: 'LetsInvest',
-    outputs: [],
-    payable: true,
-    stateMutability: 'payable',
+    name: 'Invest2FulcrumAddress',
+    outputs: [
+      {
+        internalType: 'contract Invest2Fulcrum',
+        name: '',
+        type: 'address'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
     type: 'function'
   },
   {
     constant: true,
     inputs: [],
-    name: 'SAI_TokenContractAddress',
+    name: 'Invest2cDAIAddress',
     outputs: [
+      {
+        internalType: 'contract Invest2cDAI',
+        name: '',
+        type: 'address'
+      }
+    ],
+    payable: false,
+    stateMutability: 'view',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
       {
         internalType: 'address',
-        name: '',
+        name: '_towhomtoIssueAddress',
         type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'UniSwapAddLiquityV2_GeneralAddress',
-    outputs: [
-      {
-        internalType: 'contract UniSwapAddLiquityV2_General',
-        name: '',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: '_owner',
-    outputs: [
-      {
-        internalType: 'address payable',
-        name: '',
-        type: 'address'
-      }
-    ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function'
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: 'balance',
-    outputs: [
+      },
       {
         internalType: 'uint256',
-        name: '',
+        name: '_cDAIAllocation',
+        type: 'uint256'
+      },
+      {
+        internalType: 'uint256',
+        name: '_slippage',
         type: 'uint256'
       }
     ],
-    payable: false,
-    stateMutability: 'view',
+    name: 'LetsInvest',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool'
+      }
+    ],
+    payable: true,
+    stateMutability: 'payable',
     type: 'function'
   },
   {
     constant: false,
     inputs: [],
-    name: 'depositETH',
+    name: 'destruct',
     outputs: [],
-    payable: true,
-    stateMutability: 'payable',
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'contract IERC20',
+        name: '_TokenAddress',
+        type: 'address'
+      }
+    ],
+    name: 'inCaseTokengetsStuck',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'address',
+        name: '_Invest2cDAIAddress',
+        type: 'address'
+      }
+    ],
+    name: 'initialize',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
     type: 'function'
   },
   {
@@ -139,7 +125,7 @@ const UNIPOOL_SAI_ABI = [
     name: 'owner',
     outputs: [
       {
-        internalType: 'address',
+        internalType: 'address payable',
         name: '',
         type: 'address'
       }
@@ -150,38 +136,38 @@ const UNIPOOL_SAI_ABI = [
   },
   {
     constant: false,
+    inputs: [
+      {
+        internalType: 'contract Invest2Fulcrum',
+        name: '_Invest2FulcrumAddress',
+        type: 'address'
+      }
+    ],
+    name: 'set_Invest2FulcrumAddress',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        internalType: 'contract Invest2cDAI',
+        name: '_Invest2cDAIAddress',
+        type: 'address'
+      }
+    ],
+    name: 'set_Invest2cDAIAddress',
+    outputs: [],
+    payable: false,
+    stateMutability: 'nonpayable',
+    type: 'function'
+  },
+  {
+    constant: false,
     inputs: [],
-    name: 'renounceOwnership',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_new_SAI_TokenContractAddress',
-        type: 'address'
-      }
-    ],
-    name: 'set_new_SAI_TokenContractAddress',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function'
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        internalType: 'contract UniSwapAddLiquityV2_General',
-        name: '_new_UniSwapAddLiquityV2_GeneralAddress',
-        type: 'address'
-      }
-    ],
-    name: 'set_new_UniSwapAddLiquityV2_GeneralAddress',
+    name: 'toggleContractActive',
     outputs: [],
     payable: false,
     stateMutability: 'nonpayable',
@@ -212,4 +198,5 @@ const UNIPOOL_SAI_ABI = [
     type: 'function'
   }
 ];
-export default UNIPOOL_SAI_ABI;
+
+export default LENDER_ABI;

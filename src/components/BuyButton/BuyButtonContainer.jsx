@@ -3,18 +3,20 @@ import { Modal, ModalBody } from 'reactstrap';
 import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import Tooltip from 'react-bootstrap/Tooltip';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
+// import Tooltip from 'react-bootstrap/Tooltip';
+// import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import Row from 'react-bootstrap/Row';
 import Column from 'react-bootstrap/Col';
 import Web3 from 'web3';
 import isEmpty from 'lodash/isEmpty';
+import styles from './BuyButton.module.css';
 import '../../App.css';
 import Loading from '../Loading';
 import Confirmed from '../Confirmed';
-import Rejected from '../Rejected'
+import Rejected from '../Rejected';
+import Simulator from '../Simulator';
 
 import contractProvider from '../../utils/web3DataProvider';
 import { registerEvent } from '../../api/googleAnalytics';
@@ -24,9 +26,6 @@ import {
   buildOptions,
   checkResponse
 } from '../../api/apiHelpers';
-
-// import Spreads from '../Spreads';
-import Spread from '../Spreads/Spread';
 
 class LenderBuyButton extends React.Component {
   constructor(props) {
@@ -49,8 +48,7 @@ class LenderBuyButton extends React.Component {
       showCross: false,
       showCheck: false,
       gasMode: 'average',
-      errorMessage: '',
-      depositTxHash: '',
+      txId: '',
       web3
     };
   }
@@ -70,7 +68,11 @@ class LenderBuyButton extends React.Component {
   };
 
   toggle = () => {
-    this.setState({ open: !this.state.open, showCheck: false, showCross: false });
+    this.setState({
+      open: !this.state.open,
+      showCheck: false,
+      showCross: false
+    });
   };
 
   handleSubmit = async event => {
@@ -97,15 +99,38 @@ class LenderBuyButton extends React.Component {
         } = contractProvider(this.props.name);
         const newAddress = await ens.getAddress(contractAddress);
         const valueToInvest = this.state.value;
-        const contract = new web3.eth.Contract(contractAbi, newAddress);
+        const contract = new this.state.web3.eth.Contract(
+          contractAbi,
+          newAddress
+        );
         this.setState({ showLoader: true, showCross: false, showCheck: false });
         let tx;
         if (this.props.name === 'Lender') {
-          tx = await contract.methods.SafeNotSorryZapInvestment();
-        } else if (this.props.name === 'ETH Bull') {
-          tx = await contract.methods.ETHMaximalistZAP();
-        } else if (this.props.name === 'CHAI Unipool') {
-          tx = await contract.methods.LetsInvest('0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', window.web3.currentProvider.selectedAddress, 5)
+          tx = await contract.methods.LetsInvest(
+            window.web3.currentProvider.selectedAddress,
+            90,
+            5
+          );
+        } else if (
+          this.props.name === 'ETH Bull' ||
+          this.props.name === 'Double Bull' ||
+          this.props.name === 'Super Saver' ||
+          this.props.name === 'Moderate Bull'
+        ) {
+          tx = await contract.methods.LetsInvest(
+            window.web3.currentProvider.selectedAddress,
+            50,
+            5
+          );
+        } else if (
+          this.props.name === 'CHAI Unipool' ||
+          this.props.name === 'cDAI Unipool'
+        ) {
+          tx = await contract.methods.LetsInvest(
+            '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
+            window.web3.currentProvider.selectedAddress,
+            5
+          );
         } else {
           tx = await contract.methods.LetsInvest();
         }
@@ -121,9 +146,9 @@ class LenderBuyButton extends React.Component {
               receipt.transactionHash
             );
             this.setState({
-              depositTxHash: receipt.transactionHash,
               showLoader: false,
-              showCheck: true
+              showCheck: true,
+              txId: receipt.transactionHash
             });
           })
           .on('error', error => {
@@ -148,7 +173,6 @@ class LenderBuyButton extends React.Component {
     try {
       const [account] = await window.ethereum.enable();
       this.setState({ account });
-
     } catch (error) {
       console.error(error);
       alert('You will need to connect web3 wallet');
@@ -156,18 +180,25 @@ class LenderBuyButton extends React.Component {
     }
   }
 
-
   renderModal() {
-    const { open, value, web3 } = this.state;
-    const { id, name, ensAddress, gasLimitRequirement, hasReturnsChart } = this.props;
+    const { open, value } = this.state;
+    const {
+      name,
+      ensAddress,
+      gasLimitRequirement,
+      hasReturnsChart,
+      tokenInfo,
+      tokenAddress
+    } = this.props;
+
     return (
       <Modal isOpen={open} toggle={this.toggle} centered>
         <ModalBody>
           <form onSubmit={this.handleSubmit}>
-            <div className="buycontainer">
+            <div className={`${styles.buycontainer}`}>
               <h1>{name}</h1>
-              <div className="buycontents">
-                <p className="buytext pt-4 mr-2">INPUT</p>
+              <div className={`${styles.buycontents}`}>
+                <p className={`${styles.buytext} pt-4 mr-2`}>INPUT</p>
                 <input
                   min={0.01}
                   type="number"
@@ -179,18 +210,22 @@ class LenderBuyButton extends React.Component {
                   style={
                     value && value.length > 3
                       ? {
-                        width: `${90 + value.length * 20}px`
-                      }
+                          width: `${90 + value.length * 20}px`
+                        }
                       : {
-                        width: '90px'
-                      }
+                          width: '90px'
+                        }
                   }
                 />
-                <p className="buytext pt-4 ml-2">ETH</p>
+                <p className={`${styles.buytext} pt-4 ml-2`}>ETH</p>
               </div>
-              <div>
-                <Spread type={id} input={this.state.value} />
-              </div>
+              {hasReturnsChart ? (
+                <Simulator
+                  value={this.state.value}
+                  tokenInfo={tokenInfo}
+                  tokenAddress={tokenAddress}
+                />
+              ) : null}
               {/* <div className='justify-content-center pl-4'>Slippage</div> */}
               {/* {hasReturnsChart ? 
               <Row className="justify-content-center pe-4 pt-2">
@@ -239,12 +274,16 @@ class LenderBuyButton extends React.Component {
                     Fast
                   </ToggleButton>
                 </ToggleButtonGroup>
-
               </Row>
               {/* <Row className='justify-content-center py-2'>1.3 Gwei ($0.28)</Row> */}
               <Row>
                 <Column sm={12} mb={8}>
-                  <p className='pt-2' style={{ fontSize: '0.75em' }}>Alternatively send ETH directly to {ensAddress} using<i> minimum </i><span onCopy={gasLimitRequirement}></span>{gasLimitRequirement} gas.</p>
+                  <p className="pt-2" style={{ fontSize: '0.75em' }}>
+                    Alternatively send ETH directly to {ensAddress} using
+                    <i> minimum </i>
+                    <span onCopy={gasLimitRequirement} />
+                    {gasLimitRequirement} gas.
+                  </p>
                 </Column>
               </Row>
             </div>
@@ -262,8 +301,9 @@ class LenderBuyButton extends React.Component {
               </div>
               {this.state.showLoader ? <Loading /> : null}
               {this.state.showCross ? <Rejected /> : null}
-              {this.state.showCheck ? <Confirmed /> : null}
-
+              {this.state.showCheck ? (
+                <Confirmed txId={this.state.txId} />
+              ) : null}
             </div>
           </form>
         </ModalBody>
@@ -278,6 +318,7 @@ class LenderBuyButton extends React.Component {
         {isOrderable ? (
           // eslint-disable-next-line jsx-a11y/accessible-emoji
           <Button
+            className={`${styles.buyButton}`}
             onClick={() => {
               this.setState({ open: true });
               registerEvent({
@@ -286,23 +327,23 @@ class LenderBuyButton extends React.Component {
               });
             }}
             disabled={!isOrderable}
-            variant="outline-primary"
-            size={!isEmpty(size) ? size : 'auto'}
+            // variant="outline-primary"
+            size={!isEmpty(size) ? size : 'md'}
             block={block}
           >
             ⚡ Use This Zap
           </Button>
         ) : (
-            <Button
-              onClick={() => this.setState({ open: true })}
-              disabled={!isOrderable}
-              variant="outline-primary"
-              size={!isEmpty(size) ? size : 'auto'}
-              block={block}
-            >
-              Coming Soon
+          <Button
+            onClick={() => this.setState({ open: true })}
+            disabled={!isOrderable}
+            variant="outline-primary"
+            size={!isEmpty(size) ? size : 'auto'}
+            block={block}
+          >
+            Coming Soon
           </Button>
-          )}
+        )}
         {this.renderModal()}
       </>
     );
