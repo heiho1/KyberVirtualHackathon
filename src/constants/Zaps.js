@@ -37,7 +37,7 @@ const Zaps = {
     ],
     oneClickAccessTo: [
       { text: '🦄 Pooling', color: '#66098e' },
-      { text: '💸 Lending', color: '#63d37b' }
+      { text: '💸 Lending', color: '#63d37b', url:'https://compound.finance/markets' }
     ],
     numberOfInteractions: 5,
     outperformsDuring: ['Choppy Markets'],
@@ -420,8 +420,8 @@ const Zaps = {
       ]
     },
     oneClickAccessTo: [
-      { text: '🚀 Long ETH with 2X Leverage', color: '#007BFF' },
-      { text: '🚀 Long BTC with 2X Leverage', color: '#FFC107' }
+      { text: '🚀 Long ETH with 2X Leverage', color: '#007BFF', url:'https://etherscan.io/token/0x8129d9b2c3748791c430fea241207a4f9a0ac516' },
+      { text: '🚀 Long BTC with 2X Leverage', color: '#FFC107', url:'https://etherscan.io/token/0x9fe6854447bb39dc8b78960882831269f9e78408' }
     ],
     platformsUsed: [
       {
@@ -485,8 +485,8 @@ const Zaps = {
       ]
     },
     oneClickAccessTo: [
-      { text: '💸 Lending', color: '#63d37b' },
-      { text: '🚀 Long ETH with 2X Leverage', color: '#007BFF' }
+      { text: '💸 Lending', color: '#63d37b', url:'https://compound.finance/markets' },
+      { text: '🚀 Long ETH with 2X Leverage', color: '#007BFF',url:'https://etherscan.io/token/0x8129d9b2c3748791c430fea241207a4f9a0ac516' }
     ],
     platformsUsed: [
       {
@@ -556,7 +556,7 @@ const Zaps = {
       ]
     },
     oneClickAccessTo: [
-      { text: '🚀 Long ETH with 2X Leverage', color: '#007BFF' },
+      { text: '🚀 Long ETH with 2X Leverage', color: '#007BFF',url:'https://etherscan.io/token/0x8129d9b2c3748791c430fea241207a4f9a0ac516' },
       { text: '🐻 Short BTC', color: '#DC3545' }
     ],
     platformsUsed: [
@@ -621,7 +621,7 @@ const Zaps = {
         '50% used to acquire sETH on Synthetix exchange.'
       ]
     },
-    oneClickAccessTo: [{ text: '📊 Synthetic Assets', color: '#6C757D' }],
+    oneClickAccessTo: [{ text: '📊 Synthetic Assets', color: '#6C757D', url:'https://dashboard.synthetix.io/' }],
     platformsUsed: [
       {
         key: 'Synthetix',
@@ -685,7 +685,7 @@ const Zaps = {
         '50% auto-converted into DAI + supplied to Fulcrum to mint iDAI'
       ]
     },
-    oneClickAccessTo: [{ text: '💸 Lending', color: '#63d37b' }],
+    oneClickAccessTo: [{ text: '💸 Lending', color: '#63d37b', url:'https://compound.finance/markets' }],
     platformsUsed: [
       {
         key: 'Compound',

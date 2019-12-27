@@ -71,7 +71,7 @@ const Zap = props => {
                   {props.oneClickAccessTo.map((access, index) => (
                     <Row key={access.text} className="justify-content-center">
                       <a
-                        href={access.url ? access.url : props.hasReturnsChart && access.text !== '💸 Lending' ? `https://pools.fyi/#/returns/${props.tokenAddress}` : null}
+                        href={access.url ? access.url : props.hasReturnsChart ? `https://pools.fyi/#/returns/${props.tokenAddress}` : null}
                         key={access.text}
                         rel="noopener noreferrer"
                         target="_blank"
