@@ -184,14 +184,15 @@ class BuyButtonContainer extends React.Component {
       tokenInfo,
       tokenAddress
     } = this.props;
+    
     return (
       <Modal isOpen={open} toggle={this.toggle} centered>
         <ModalBody>
           <form onSubmit={this.handleSubmit}>
-            <div className="buycontainer">
+            <div className={`${styles.buycontainer}`}>
               <h1>{name}</h1>
-              <div className="buycontents">
-                <p className="buytext pt-4 mr-2">INPUT</p>
+              <div className={`${styles.buycontents}`}>
+                <p className={`${styles.buytext} pt-4 mr-2`}>INPUT</p>
                 <input
                   min={0.01}
                   type="number"
@@ -210,7 +211,7 @@ class BuyButtonContainer extends React.Component {
                         }
                   }
                 />
-                <p className="buytext pt-4 ml-2">ETH</p>
+                <p className={`${styles.buytext} pt-4 ml-2`}>ETH</p>
               </div>
               {hasReturnsChart ? (
                 <Simulator

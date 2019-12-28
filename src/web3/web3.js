@@ -1,6 +1,6 @@
-import Onboard from 'bnc-onboard';
+//import Onboard from 'bnc-onboard';
 import Web3 from 'web3';
-
+/*
 // eslint-disable-next-line import/no-mutable-exports
 let web3;
 
@@ -35,6 +35,7 @@ const wallets = [
   // { walletName: 'trust', preferred: true }
 ];
 
+
 const initializationOptions = {
   dappId: process.env.REACT_APP_BLOCKNATIVE_ID,
   networkId: 1,
@@ -56,5 +57,17 @@ const initializationOptions = {
 };
 
 const onboard = Onboard(initializationOptions);
+*/
+ export const getWeb3 = () => {
+  let web3;
+    if (
+      typeof window.ethereum !== 'undefined' ||
+      typeof window.web3 !== 'undefined'
+    ) {
+      const provider = window.ethereum || window.web3.currentProvider;
+      web3 = new Web3(provider);
+    }
+    return web3;
+}
 
-export { onboard, web3 };
+//export { getWeb3};

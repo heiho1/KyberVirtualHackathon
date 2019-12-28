@@ -2,14 +2,11 @@ import React from 'react';
 import { Modal, ModalBody } from 'reactstrap';
 import Button from 'react-bootstrap/Button';
 import ToggleButton from 'react-bootstrap/ToggleButton';
+import Spinner from 'react-bootstrap/Spinner';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-// import Tooltip from 'react-bootstrap/Tooltip';
-// import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Row from 'react-bootstrap/Row';
 import Column from 'react-bootstrap/Col';
-import Web3 from 'web3';
 import isEmpty from 'lodash/isEmpty';
-
 import styles from './GiftButton.module.css';
 import '../../App.css';
 import Loading from '../Loading';
@@ -19,6 +16,7 @@ import Simulator from '../Simulator';
 import contractProvider from '../../utils/giftweb3DataProvider';
 import { registerEvent } from '../../api/googleAnalytics';
 import { BUY_ZAP, INITIATE_PURCHASE } from '../../constants/googleAnalytics';
+import { getWeb3 } from '../../web3/web3';
 import {
   fetchRequest,
   buildOptions,
@@ -37,7 +35,10 @@ class GiftButtonContainer extends React.Component {
       showCheck: false,
       gasMode: 'average',
       toAddress: '',
-      txId: ''
+      txId: '',
+      addressToPrint: '',
+      tick: '',
+      cross: ''
     };
   }
 
@@ -71,19 +72,14 @@ class GiftButtonContainer extends React.Component {
     });
     try {
       await this.initialize();
-      let web3;
-      if (
-        typeof window.ethereum !== 'undefined' ||
-        typeof window.web3 !== 'undefined'
-      ) {
-        const provider = window.ethereum || window.web3.currentProvider;
-        web3 = new Web3(provider);
-      }
+      const web3 = getWeb3();
       const networkId = await web3.eth.net.getId();
       const { ens } = web3.eth;
+
       const isInvalidAddress = !(await web3.utils.isAddress(
         this.state.toAddress
       ));
+
       await this.getGas();
       if (networkId !== 1 || isInvalidAddress) {
         if (isInvalidAddress) {
@@ -178,11 +174,110 @@ class GiftButtonContainer extends React.Component {
   };
 
   handleAddressChange = async event => {
-    this.setState({ toAddress: event.target.value });
+    await this.setState({
+      toAddress: event.target.value,
+      addressToPrint: event.target.value
+    });
+    if (this.state.toAddress.length >= 1) {
+      await this.setState({
+        tick: (
+          <Spinner animation="border" className={`${styles.loader}`}>
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        )
+      });
+    } else {
+      await this.setState({ tick: '', cross: '' });
+    }
+    let newAddress;
+    const web3 = getWeb3();
+    let flag = 1;
+    const thisObj = this;
+    if (
+      this.state.toAddress.indexOf('.eth') !== -1 &&
+      this.state.toAddress.length - this.state.toAddress.indexOf('.eth') === 4
+    ) {
+      await web3.eth.ens
+        .getAddress(this.state.toAddress.trim())
+        .then(function(address) {
+          flag = 2;
+          newAddress = address;
+        })
+        .catch(function() {
+          thisObj.setState({
+            tick: <Button className={`${styles.cross}`}>&nbsp;X&nbsp;</Button>
+          });
+        });
+
+      if (flag === 2) {
+        this.setState({
+          toAddress: newAddress,
+          tick: (
+            <Button className={`${styles.tickbtn}`} variant="success">
+              &nbsp;✓&nbsp;
+            </Button>
+          )
+        });
+      } else {
+        this.setState({
+          tick: <Button className={`${styles.cross}`}>&nbsp;X&nbsp;</Button>
+        });
+      }
+    } else if (this.state.toAddress.length === 42) {
+      const isInvalidAddress = !(await web3.utils.isAddress(
+        this.state.toAddress
+      ));
+      if (!isInvalidAddress) {
+        this.setState({
+          tick: (
+            <Button className={`${styles.tickbtn}`} variant="success">
+              &nbsp;✓&nbsp;
+            </Button>
+          )
+        });
+      } else {
+        this.setState({
+          tick: (
+            <Button className={`${styles.cross}`} variant="danger">
+              &nbsp;X&nbsp;
+            </Button>
+          )
+        });
+      }
+    }
+  };
+
+  handleAddressChangeBlur = async event => {
+    if (
+      this.state.toAddress.length === 42 &&
+      event.target.value.indexOf('.eth') !== -1
+    ) {
+      this.setState({
+        addressToPrint: `${event.target.value} : ${this.state.toAddress}`
+      });
+    }
+  };
+
+  handleAddressChangeFocus = async event => {
+    if (
+      event.target.value.length === this.state.addressToPrint.length &&
+      this.state.addressToPrint.indexOf('.eth') !== -1
+    ) {
+      await this.setState({
+        addressToPrint: this.state.addressToPrint.substring(
+          0,
+          this.state.addressToPrint.indexOf('.eth') + 4
+        )
+      });
+    }
   };
 
   setGasMode = async gasMode => {
     await this.setState({ gasMode });
+  };
+
+  cancelAddress = async event => {
+    this.setState({ toAddress: '', addressToPrint: '', tick: '', cross: '' });
   };
 
   async initialize() {
@@ -203,22 +298,32 @@ class GiftButtonContainer extends React.Component {
       <Modal isOpen={open} toggle={this.toggle} centered>
         <ModalBody>
           <form onSubmit={this.handleSubmit}>
-            <div className="buycontainer">
+            <div className={`${styles.buycontainer}`}>
               <h1>{name}</h1>
-              <Row className="d-flex justify-content-center my-1 py-0">
-                <Column xs={12}>Send to</Column>
+              <Row
+                className={`${styles.sendcontents} d-flex justify-content-center my-1 py-0`}
+              >
                 <Column xs={12}>
+                  <div className={`${styles.buycontents}`}>
+                    <p className={`${styles.buytext1}`}>Send to</p>
+                  </div>
+                </Column>
+                <Column xs={12}>
+                  {this.state.tick}
                   <input
                     type="text"
                     required
                     minLength="40"
+                    onFocus={this.handleAddressChangeFocus}
+                    onBlur={this.handleAddressChangeBlur}
                     onChange={this.handleAddressChange}
-                    value={toAddress}
-                    placeholder="Enter Ethereum address..."
+                    value={addressToPrint}
+                    placeholder="Enter public address(0x) or ENS address..."
                     style={{ width: '80%' }}
                   />
+                  {this.state.cross}
                 </Column>
-                <Column>
+                <Column className="mt-2">
                   <b>
                     No ETH Wallet?{' '}
                     <a
@@ -231,8 +336,8 @@ class GiftButtonContainer extends React.Component {
                   </b>
                 </Column>
               </Row>
-              <div className="buycontents">
-                <p className="buytext pt-4 mr-2">INPUT</p>
+              <div className={`${styles.buycontents}`}>
+                <p className={`${styles.buytext} pt-4 mr-2`}>INPUT</p>
                 <input
                   min={0.01}
                   type="number"
@@ -251,7 +356,7 @@ class GiftButtonContainer extends React.Component {
                         }
                   }
                 />
-                <p className="buytext pt-4 ml-2">ETH</p>
+                <p className={`${styles.buytext} pt-4 ml-2`}>ETH</p>
               </div>
               {hasReturnsChart ? (
                 <Simulator

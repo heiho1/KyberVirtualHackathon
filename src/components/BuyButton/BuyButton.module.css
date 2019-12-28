@@ -10,6 +10,43 @@
   }
 }
 
+.buycontainer {
+  position: relative !important;
+  text-align: center !important;
+}
+
+.buycontents {
+  display: inline-flex !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.buytext {
+  padding-top:1.5rem !important;
+  margin-right: .5rem !important;
+  margin-left: .5rem !important;
+  font-size: 22px !important;
+  color: #1d144f !important;
+}
+
+.buycontents input {
+  border-top: none;
+  border-right: none;
+  border-bottom: 3px solid rgb(43, 177, 96);
+  border-left: none;
+  border-image: initial;
+  color: rgb(43, 177, 96);
+  max-width: 65%;
+  overflow: hidden;
+  text-align: left;
+  width: 70px;
+  font-size: 48px;
+}
+
+.buycontents input:focus {
+  outline: none;
+}
+
 .buyButton:hover {
   background: linear-gradient(90deg, #374d9b 0%, #374d9b 100%);
     border: none;
