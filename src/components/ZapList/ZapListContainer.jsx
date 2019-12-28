@@ -25,7 +25,7 @@ class ZapListContainer extends PureComponent {
       stats.forEach(stat => {
         data.forEach(zap => {
           if (zap.name === stat.name) {
-            zap[stats] = stat;
+            zap.stats = stat;
           }
         });
       });
