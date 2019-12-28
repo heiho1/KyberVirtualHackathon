@@ -292,7 +292,7 @@ class GiftButtonContainer extends React.Component {
   }
 
   renderModal() {
-    const { open, value, toAddress } = this.state;
+    const { open, value, addressToPrint } = this.state;
     const { name, hasReturnsChart, tokenInfo, tokenAddress } = this.props;
     return (
       <Modal isOpen={open} toggle={this.toggle} centered>
