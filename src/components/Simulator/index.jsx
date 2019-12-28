@@ -152,7 +152,7 @@ class Simulator extends PureComponent {
               <OverlayTrigger
                 overlay={
                   <Tooltip>
-                    {tokenInfo.name === 'CHAI' || tokenInfo.name ==='cDAI'
+                    {tokenInfo.name === 'CHAI' || tokenInfo.name === 'cDAI'
                       ? `In order to avoid excessive slippage, half of your input ETH is converted to DAI on Kyber before being wrapped into ${tokenInfo.name}. Ether is split 50.5% into ${tokenInfo.name} and 49.5% stays in ETH. After adding the liquidity to the pool, we return a small fraction of the ${tokenInfo.name} which wasn't used.`
                       : `Ether is split 50.5% into ${tokenInfo.name} and 49.5% stays in ETH. After adding the liquidity to the pool, we return a small fraction of the ${tokenInfo.name} which wasn't used.`}
                   </Tooltip>

@@ -198,14 +198,7 @@ class GiftButtonContainer extends React.Component {
 
   renderModal() {
     const { open, value, toAddress } = this.state;
-    const {
-      name,
-      ensAddress,
-      gasLimitRequirement,
-      hasReturnsChart,
-      tokenInfo,
-      tokenAddress
-    } = this.props;
+    const { name, hasReturnsChart, tokenInfo, tokenAddress } = this.props;
     return (
       <Modal isOpen={open} toggle={this.toggle} centered>
         <ModalBody>
@@ -314,17 +307,6 @@ class GiftButtonContainer extends React.Component {
                   </ToggleButton>
                 </ToggleButtonGroup>
               </Row>
-              {/* <Row className='justify-content-center py-2'>1.3 Gwei ($0.28)</Row> */}
-              {/* <Row>
-                <Column sm={12} mb={8}>
-                  <p className="pt-2" style={{ fontSize: '0.75em' }}>
-                    Alternatively send ETH directly to {ensAddress} using
-                    <i> minimum </i>
-                    <span onCopy={gasLimitRequirement} />
-                    {gasLimitRequirement} gas.
-                  </p>
-                </Column>
-              </Row> */}
             </div>
             <div className="my-4 row justify-content-center">
               <input
@@ -353,38 +335,28 @@ class GiftButtonContainer extends React.Component {
   render() {
     const { isOrderable, name, block, size } = this.props;
     return (
-        <>
-          {isOrderable ? (
-            // eslint-disable-next-line jsx-a11y/accessible-emoji
-            <Button
-              className={`${styles.giftButton}`}
-              onClick={() => {
-                this.setState({ open: true });
-                registerEvent({
-                  category: BUY_ZAP,
-                  action: name
-                });
-              }}
-              disabled={!isOrderable}
-              // variant="outline-danger"
-              size={!isEmpty(size) ? size : 'md'}
-              block={block}
-            >
-              🎁 Gift This Zap
-            </Button>
-          ) : (
-            <Button
-              onClick={() => this.setState({ open: true })}
-              disabled={!isOrderable}
-              variant="outline-primary"
-              size={!isEmpty(size) ? size : 'auto'}
-              block={block}
-            >
-              Coming Soon
-            </Button>
-          )}
-          {this.renderModal()}
-        </>
+      <>
+        {isOrderable ? (
+          // eslint-disable-next-line jsx-a11y/accessible-emoji
+          <Button
+            className={`${styles.giftButton}`}
+            onClick={() => {
+              this.setState({ open: true });
+              registerEvent({
+                category: BUY_ZAP,
+                action: name
+              });
+            }}
+            disabled={!isOrderable}
+            // variant="outline-danger"
+            size={!isEmpty(size) ? size : 'md'}
+            block={block}
+          >
+            🎁 Gift This Zap
+          </Button>
+        ) : null}
+        {this.renderModal()}
+      </>
     );
   }
 }
