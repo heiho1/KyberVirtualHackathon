@@ -17,17 +17,18 @@ const WhyUseDeFiZap = () => (
         <img src={SaveTime} width="94px" alt="Save Time" />
         <h5>Save Time</h5>
         <p>
-        DeFiZap is a system of smart contracts - Zaps - that deploys 
-        your Ether (and soon DAI) across multiple DeFi protocols in one transaction, saving your time.
+          DeFiZap is a system of smart contracts - Zaps - that deploys your
+          Ether (and soon DAI) across multiple DeFi protocols in one
+          transaction, saving your time.
         </p>
       </Col>
       <Col sm md lg>
         <img src={SaveGas} width="120px" alt="Save Time" />
         <h5>Easy Access</h5>
         <p>
-        DeFiZap doesn’t spread your Ether into 'top 10 on coinmarketcap' - 
-        Zaps infuse Ether into DeFi protocols built on top of Ethereum, 
-        furthering user adoption.
+          DeFiZap doesn’t spread your Ether into 'top 10 on coinmarketcap' -
+          Zaps infuse Ether into DeFi protocols built on top of Ethereum,
+          furthering user adoption.
           <br />
           <a
             href="https://defitutorials.substack.com/p/get-instant-exposure-across-multiple"

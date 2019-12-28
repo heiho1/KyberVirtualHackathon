@@ -33,9 +33,7 @@ class ZapFullView extends PureComponent {
       metamaskInteractionsSaved,
       ensAddress,
       gasLimitRequirement,
-      tokenInfo,
       tokenAddress,
-      volume,
       illustration,
       stats
     } = this.props;
@@ -58,7 +56,6 @@ class ZapFullView extends PureComponent {
             <Col xs={12} md={6} className="justify-content-center text-center">
               <GiftButton {...this.props} size="md" />
             </Col>
-
           </Row>
 
           <Row className="justify-content-center align-text-center">
@@ -75,14 +72,27 @@ class ZapFullView extends PureComponent {
                   <h5>
                     {oneClickAccessTo.map((access, index) => (
                       <Row key={access.text} className="justify-content-center">
-                        <Badge
+                        <a
+                          href={
+                            access.url
+                              ? access.url
+                              : hasReturnsChart
+                              ? `https://pools.fyi/#/returns/${tokenAddress}`
+                              : null
+                          }
                           key={access.text}
-                          style={{ backgroundColor: access.color }}
-                          variant="primary"
-                          className={index === 0 ? 'beforePill' : 'afterPill'}
+                          rel="noopener noreferrer"
+                          target="_blank"
                         >
-                          {access.text}
-                        </Badge>
+                          <Badge
+                            key={access.text}
+                            style={{ backgroundColor: access.color }}
+                            variant="primary"
+                            className={index === 0 ? 'beforePill' : 'afterPill'}
+                          >
+                            {access.text}
+                          </Badge>
+                        </a>
                       </Row>
                     ))}
                   </h5>
@@ -119,6 +129,7 @@ class ZapFullView extends PureComponent {
                 <img
                   className="pb-2"
                   src={illustrations(`./${illustration}`)}
+                  alt="Illustrations explaining what the Zap means"
                 />
               ) : this.props.whatThisMeans ? (
                 <span>
@@ -151,7 +162,10 @@ class ZapFullView extends PureComponent {
                   </h6>
                   <h6>
                     <b style={{ fontSize: '1.8em' }}>
-                      {stats.volumeETH ? this.numberWithCommas(stats.volumeETH.toFixed(0)) : '-'} ETH
+                      {stats.volumeETH
+                        ? this.numberWithCommas(stats.volumeETH.toFixed(0))
+                        : '-'}{' '}
+                      ETH
                     </b>
                     <p
                       className="pt-1"

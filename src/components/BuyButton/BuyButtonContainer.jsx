@@ -27,7 +27,7 @@ import {
   checkResponse
 } from '../../api/apiHelpers';
 
-class LenderBuyButton extends React.Component {
+class BuyButtonContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -308,7 +308,6 @@ class LenderBuyButton extends React.Component {
   render() {
     const { isOrderable, name, block, size } = this.props;
     return (
-
       <>
         {isOrderable ? (
           // eslint-disable-next-line jsx-a11y/accessible-emoji
@@ -328,21 +327,11 @@ class LenderBuyButton extends React.Component {
           >
             ⚡ Use This Zap
           </Button>
-        ) : (
-          <Button
-            onClick={() => this.setState({ open: true })}
-            disabled={!isOrderable}
-            variant="outline-primary"
-            size={!isEmpty(size) ? size : 'auto'}
-            block={block}
-          >
-            Coming Soon
-          </Button>
-        )}
+        ) : null}
         {this.renderModal()}
       </>
     );
   }
 }
 
-export default LenderBuyButton;
+export default BuyButtonContainer;

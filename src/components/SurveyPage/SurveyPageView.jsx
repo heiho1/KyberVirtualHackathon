@@ -31,7 +31,6 @@ const SurveyPageView = props => {
   } = props;
 
   const getZap = () => {
-    console.log(stats)
     return (
       <>
         <br /> <br />
@@ -39,16 +38,13 @@ const SurveyPageView = props => {
           You might find these Zaps useful: <br />
         </h4>
         <Row className="justify-content-center">
-          {recommendedZaps.map(zap =>{
-            if(stats) stats.forEach(stat =>{
-              if(zaps[zap].name === stat.name) zaps[zap].stats = stat
-            })
-            return <Zap key={zaps[zap].name} {...zaps[zap]} />
-
+          {recommendedZaps.map(zap => {
+            if (stats)
+              stats.forEach(stat => {
+                if (zaps[zap].name === stat.name) zaps[zap].stats = stat;
+              });
+            return <Zap key={zaps[zap].name} {...zaps[zap]} />;
           })}
-          {/* {recommendedZaps.map(zap => (
-            <Zap key={zaps[zap].name} {...zaps[zap]} />
-          ))} */}
         </Row>
         <br />
         <Row className="justify-content-center pb-3">

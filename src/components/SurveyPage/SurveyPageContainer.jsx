@@ -7,8 +7,7 @@ import surveyList from '../../constants/SurveyQuestions';
 import surveyResponse from '../../constants/SurveyResults';
 import { registerEvent } from '../../api/googleAnalytics';
 import { SURVEY_COMPLETED } from '../../constants/googleAnalytics';
-import ZapStats from '../../api/zapStats'
-
+import ZapStats from '../../api/zapStats';
 
 class SurveyPageContainer extends PureComponent {
   constructor(props) {
@@ -24,9 +23,9 @@ class SurveyPageContainer extends PureComponent {
     autobind(this);
   }
 
-  async componentDidMount(){
-    const stats = await ZapStats()
-    this.setState({stats})
+  async componentDidMount() {
+    const stats = await ZapStats();
+    this.setState({ stats });
   }
 
   onAnswer = answer => {

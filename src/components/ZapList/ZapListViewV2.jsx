@@ -70,13 +70,26 @@ const Zap = props => {
                 <h6>
                   {props.oneClickAccessTo.map((access, index) => (
                     <Row key={access.text} className="justify-content-center">
-                      <Badge
-                        style={{ backgroundColor: access.color }}
-                        variant="primary"
-                        className={index === 0 ? 'beforePill' : 'afterPill'}
+                      <a
+                        href={
+                          access.url
+                            ? access.url
+                            : props.hasReturnsChart
+                            ? `https://pools.fyi/#/returns/${props.tokenAddress}`
+                            : null
+                        }
+                        key={access.text}
+                        rel="noopener noreferrer"
+                        target="_blank"
                       >
-                        {access.text}
-                      </Badge>
+                        <Badge
+                          style={{ backgroundColor: access.color }}
+                          variant="primary"
+                          className={index === 0 ? 'beforePill' : 'afterPill'}
+                        >
+                          {access.text}
+                        </Badge>
+                      </a>
                     </Row>
                   ))}
                   {props.oneClickAccessTo.length === 1 ? (
@@ -85,8 +98,8 @@ const Zap = props => {
                 </h6>
               </span>
             ) : (
-                ''
-              )}
+              ''
+            )}
             {props.platformsUsed ? (
               <span>
                 <h6 style={{ fontSize: '0.8em' }}>PLATFORMS USED:</h6>
@@ -111,8 +124,8 @@ const Zap = props => {
                 </h6>
               </span>
             ) : (
-                ''
-              )}
+              ''
+            )}
             {props.metamaskInteractionsSaved ? (
               <span>
                 <h6 style={{ fontSize: '0.8em' }}>
@@ -129,10 +142,15 @@ const Zap = props => {
             ) : null}
             {props.stats ? (
               <span>
-                <h6 style={{ fontSize: '0.8em' }}>DEPLOYED THROUGH THIS ZAP:</h6>
+                <h6 style={{ fontSize: '0.8em' }}>
+                  DEPLOYED THROUGH THIS ZAP:
+                </h6>
                 <h6>
                   <b style={{ fontSize: '1.8em' }}>
-                    {props.stats.volumeETH ? numberWithCommas(props.stats.volumeETH.toFixed(0)) : '-'} ETH
+                    {props.stats.volumeETH
+                      ? numberWithCommas(props.stats.volumeETH.toFixed(0))
+                      : '-'}{' '}
+                    ETH
                   </b>
                   <p
                     className="pt-1"
@@ -147,14 +165,16 @@ const Zap = props => {
         </Row>
       </Col>
       {props.isOrderable ? (
-          <div className="mt-md-2 mt-2 pb-md-0 pb-3 d-flex justify-content-center">
-            <a style={{ whiteSpace: 'nowrap' }} href={`/zaps/${props.id}`}>Learn More</a>
-          </div>
-        ) : null}
-      <Row className='justify-content-center mt-3 mb-2 px-4'>
+        <div className="mt-md-2 mt-2 pb-md-0 pb-3 d-flex justify-content-center">
+          <a style={{ whiteSpace: 'nowrap' }} href={`/zaps/${props.id}`}>
+            Learn More
+          </a>
+        </div>
+      ) : null}
+      <Row className="justify-content-center mt-3 mb-2 px-4">
         <BuyButtonContainer {...props} block />
       </Row>
-      <Row className='justify-content-center mb-4 px-4'>
+      <Row className="justify-content-center mb-4 px-4">
         <GiftButton {...props} block />
       </Row>
     </Col>
