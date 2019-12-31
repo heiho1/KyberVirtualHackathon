@@ -292,16 +292,8 @@ class GiftButtonContainer extends React.Component {
   }
 
   renderModal() {
-    const { open, value, toAddress, addressToPrint } = this.state;
-    const {
-      name,
-      ensAddress,
-      gasLimitRequirement,
-      hasReturnsChart,
-      tokenInfo,
-      tokenAddress
-    } = this.props;
-
+    const { open, value, addressToPrint } = this.state;
+    const { name, hasReturnsChart, tokenInfo, tokenAddress } = this.props;
     return (
       <Modal isOpen={open} toggle={this.toggle} centered>
         <ModalBody>
@@ -309,7 +301,7 @@ class GiftButtonContainer extends React.Component {
             <div className={`${styles.buycontainer}`}>
               <h1>{name}</h1>
               <Row
-                className={`${styles.sendcontents} d-flex justify-content-center my-1 py-0` }
+                className={`${styles.sendcontents} d-flex justify-content-center my-1 py-0`}
               >
                 <Column xs={12}>
                   <div className={`${styles.buycontents}`}>
@@ -345,9 +337,7 @@ class GiftButtonContainer extends React.Component {
                 </Column>
               </Row>
               <div className={`${styles.buycontents}`}>
-                <p className={`${styles.buytext} pt-4 mr-2`}>
-                  INPUT
-                </p>
+                <p className={`${styles.buytext} pt-4 mr-2`}>INPUT</p>
                 <input
                   min={0.01}
                   type="number"
@@ -366,9 +356,7 @@ class GiftButtonContainer extends React.Component {
                         }
                   }
                 />
-                <p className={`${styles.buytext} pt-4 ml-2`}>
-                  ETH
-                </p>
+                <p className={`${styles.buytext} pt-4 ml-2`}>ETH</p>
               </div>
               {hasReturnsChart ? (
                 <Simulator
@@ -424,17 +412,6 @@ class GiftButtonContainer extends React.Component {
                   </ToggleButton>
                 </ToggleButtonGroup>
               </Row>
-              {/* <Row className='justify-content-center py-2'>1.3 Gwei ($0.28)</Row> */}
-              {/* <Row>
-                <Column sm={12} mb={8}>
-                  <p className="pt-2" style={{ fontSize: '0.75em' }}>
-                    Alternatively send ETH directly to {ensAddress} using
-                    <i> minimum </i>
-                    <span onCopy={gasLimitRequirement} />
-                    {gasLimitRequirement} gas.
-                  </p>
-                </Column>
-              </Row> */}
             </div>
             <div className="my-4 row justify-content-center">
               <input
@@ -482,17 +459,7 @@ class GiftButtonContainer extends React.Component {
           >
             🎁 Gift This Zap
           </Button>
-        ) : (
-          <Button
-            onClick={() => this.setState({ open: true })}
-            disabled={!isOrderable}
-            variant="outline-primary"
-            size={!isEmpty(size) ? size : 'auto'}
-            block={block}
-          >
-            Coming Soon
-          </Button>
-        )}
+        ) : null}
         {this.renderModal()}
       </>
     );

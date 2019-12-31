@@ -41,6 +41,7 @@ import isEmpty from 'lodash/isEmpty';
 // write text plugin
 Chart.pluginService.register({
   afterUpdate(chart) {
+    let fontSize;
     if (chart.config.options.elements.center) {
       const { helpers } = Chart;
       const centerConfig = chart.config.options.elements.center;
@@ -56,11 +57,14 @@ Chart.pluginService.register({
         globalConfig.defaultFontFamily
       );
 
-      if (centerConfig.fontSize) var { fontSize } = centerConfig;
+      if (centerConfig.fontSize) {
+        const { fontsize } = centerConfig;
+        fontSize = fontsize;
+      }
       // figure out the best font size, if one is not specified
       else {
         ctx.save();
-        var fontSize = helpers.getValueOrDefault(centerConfig.minFontSize, 1);
+        fontSize = helpers.getValueOrDefault(centerConfig.minFontSize, 1);
         const maxFontSize = helpers.getValueOrDefault(
           centerConfig.maxFontSize,
           256

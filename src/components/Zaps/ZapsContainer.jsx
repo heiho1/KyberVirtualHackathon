@@ -4,8 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import ZapsView from './ZapsView';
 import Zaps from '../../constants/Zaps';
-import ZapStats from '../../api/zapStats'
-
+import ZapStats from '../../api/zapStats';
 
 class ZapsContainer extends PureComponent {
   constructor(props) {
@@ -18,23 +17,24 @@ class ZapsContainer extends PureComponent {
   }
 
   async componentDidMount() {
-    let stats = null
-    try{
-      stats = await ZapStats()
-    }catch(e){console.error(e)}
+    let stats = null;
+    try {
+      stats = await ZapStats();
+    } catch (e) {
+      console.error(e);
+    }
     const { id } = this.props.match.params;
     this.setState({ id });
     const basketData = Zaps[id];
     if (!isEmpty(basketData)) {
-      if(stats){
-        stats.forEach(stat =>{
-            if(stat.name === basketData.name) basketData.stats = stat
-        })
+      if (stats) {
+        stats.forEach(stat => {
+          if (stat.name === basketData.name) basketData.stats = stat;
+        });
       }
       this.setState({ basketData });
+    }
   }
-}
-
 
   render() {
     const { basketData } = this.state;

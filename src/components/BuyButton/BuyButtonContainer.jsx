@@ -27,7 +27,7 @@ import {
   checkResponse
 } from '../../api/apiHelpers';
 
-class LenderBuyButton extends React.Component {
+class BuyButtonContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -333,21 +333,11 @@ class LenderBuyButton extends React.Component {
           >
             ⚡ Use This Zap
           </Button>
-        ) : (
-          <Button
-            onClick={() => this.setState({ open: true })}
-            disabled={!isOrderable}
-            variant="outline-primary"
-            size={!isEmpty(size) ? size : 'auto'}
-            block={block}
-          >
-            Coming Soon
-          </Button>
-        )}
+        ) : null}
         {this.renderModal()}
       </>
     );
   }
 }
 
-export default LenderBuyButton;
+export default BuyButtonContainer;
